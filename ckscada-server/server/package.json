@@ -1,0 +1,20 @@
+{
+  "name": "ckscada-cli",
+  "version": "1.0.0",
+  "description": "ckSCADA Command Line Tools",
+  "main": "bin/ck-create-config.js",
+  "bin": {
+    "ck-create-config": "bin/ck-create-config.js",
+    "ck=create-device": "bin/ck-create-device.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ben Hutcheson",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "kafkajs": "^1.13.0-beta.19",
+    "yargs": "^15.3.1"
+  }
+}
