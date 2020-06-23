@@ -1,0 +1,117 @@
+.header {
+  text-align: center;
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  width: 100vw;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+}
+
+body {
+  position: fixed;
+  width: 100vw;
+}
+
+.root-container {
+  --main-bg-color: #343a40;
+  --status-bg-color: #1b1b1b;
+  --border-color: #414141;
+  --active-bg-color: #222233;
+  --heading-text-color: white;
+  --default-text-color: grey;
+  --delete-button-color: red;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--main-bg-color);
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+[class*="col-"] {
+  float: left;
+}
+
+.content-container {
+  height: 85vh;
+  border-left: 1px;
+  border-right: 1px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.navigation-container {
+  overflow: visible;
+}
+
+.inter-project-container {
+  border-right: 1px solid var(--border-color);
+}
+
+.project-navigation-container {
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.project-heading {
+  padding: 5px 0px;
+  overflow-x: visible;
+}
+
+.project-item {
+  padding: 5px 0px;
+  padding-left: 20px;
+  overflow-x: visible;
+}
+
+.active {
+  background-color: var(--active-bg-color);
+}
+
+.statusbar {
+  background-color: var(--status-bg-color);
+  color: var(--heading-text-color);
+}
+
+.object-view {
+  padding: 5px 0px;
+  height: 80vh;
+
+  color: var(--heading-text-color);
+}
+
+td {
+  color: var(--default-text-color);
+}
+
+.toolbar-container {
+  height: 50px;
+  background-color: var(--main-bg-color);
+  color: var(--heading-text-color);
+
+}
+
+.toolbar-item {
+  color: var(--heading-text-color);
+  padding: 15px 5px;
+  margin: 0px 0px;
+  text-align: center;
+  justify-content: left;
+}
+
+.toolbar-controls {
+  justify-content: right;
+}
+
+.delete-button {
+  justify-content: left;
+}

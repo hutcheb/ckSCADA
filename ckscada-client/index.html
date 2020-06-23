@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+        * {
+          margin: 0;
+          padding: 0;
+          overflow: hidden;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="root-title" >Welcome to ckSCADA</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval';" />
+  </head>  
+  <body>
+    <div id="root">There seems to be a problem with loading the welcome page</div>
+
+    <script>
+        const common = require("./src/ckviewer.js");
+        common.run();    
+    </script>
+  </body>
+</html>

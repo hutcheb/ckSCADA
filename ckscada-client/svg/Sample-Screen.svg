@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="100vw" height="100vh" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <title>Sample Display</title>
+  <defs>
+    <style></style>
+    <bx:grid x="135.535" y="128.635" width="100" height="100"/>
+  </defs>
+  <text class="cktag" name="Simulated_Flow_Transmitter.Raw!value" style="fill: 'black'; font-family: &quot;Roboto Slab&quot;; font-size: 12px; white-space: pre;" x="300" y="300"><title>Test</title>####</text>
+  <text class="cktag" name="Simulated_Flow_Transmitter.Scaled!value" style="fill: 'black'; font-family: &quot;Roboto Slab&quot;; font-size: 12px; white-space: pre;" x="400" y="300"><title>Test</title>####</text>
+  <text class="cktag" name="Simulated_Flow_Transmitter.Scaled!eu" style="fill: 'black'; font-family: &quot;Roboto Slab&quot;; font-size: 12px; white-space: pre;" x="420" y="300"><title>Test</title>####</text>
+
+  <image width="50px" height="50px" x="100px" y="100px" class="ckobject" xlink:href="svg/Motor.svg" object="Simulated_Flow_Transmitter"/>
+
+  <text class="cktag" name="Simulated_Flow_Transmitter.Stored!value" style="fill: 'black'; font-family: &quot;Roboto Slab&quot;; font-size: 12px; white-space: pre;" x="500" y="300">
+      <title>Test</title>
+      <g class="ckparameter">Simulated_Flow_Transmitter.Raw!value</g>
+      <g class="ckscript">if (this.v &gt; 50) {
+              this.e.style.fill = "red";
+            } else {
+              this.e.style.fill = "green";
+            };
+            </g>
+      ####</text>
+</svg>

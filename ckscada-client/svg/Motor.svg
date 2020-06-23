@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="157.606 132.453 57.122 53.469" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs>
+
+  </defs>
+  <g>
+  <path d="M 164.667 132.453 L 198.096 132.453 L 198.096 132.755 C 202.412 133.731 205.762 140.909 205.762 149.62 C 205.762 158.33 202.412 165.508 198.096 166.484 L 198.096 166.853 L 164.667 166.853 L 164.667 166.494 C 160.647 165.016 157.606 158.108 157.606 149.809 C 157.606 141.51 160.647 134.602 164.667 133.124 Z" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" class="ckParameter">
+    <title>Body</title>
+  </path>
+  <rect x="206.96" y="144.984" width="7.768" height="9.127" style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);">
+    <title>Shaft</title>
+  </rect>
+  <text class="cktag" name="$Object.Raw!value" style="fill: rgb(51, 51, 51); font-family: &quot;Roboto Slab&quot;; font-size: 12px; white-space: pre;" x="166.057" y="182.458"><title>Tag</title>####</text>
+  <line style="stroke: rgb(0, 0, 0);" x1="164.563" y1="138.595" x2="204.762" y2="138.595"/>
+  <line style="stroke: rgb(0, 0, 0);" x1="164.522" y1="147.959" x2="205.979" y2="147.959"/>
+  <line style="stroke: rgb(0, 0, 0);" x1="164.522" y1="157.816" x2="205.762" y2="157.816"/>
+  <line style="stroke: rgb(0, 0, 0);" x1="164.522" y1="132.453" x2="164.522" y2="166.853"/>
+  </g>
+</svg>

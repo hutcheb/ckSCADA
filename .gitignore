@@ -1,0 +1,13 @@
+**/node_modules
+*package-lock.json
+ckscada-editor/method-draw
+*.pyc
+/ckscada-viewer/nbproject/private/
+**/bin
+**/include
+**/lib
+**/lib64
+**/share
+**/build
+**/__pycache__
+**/pyvenv.cfg
