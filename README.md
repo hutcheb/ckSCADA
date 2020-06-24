@@ -16,18 +16,28 @@ Roadmap
 The system is currently in the very early stage of development and is not suitable
 for production use.
 
-* v0.1 - Basic framework has been setup and proof of concept implemented.
+* v0.1 
+
+        *       Basic framework has been setup and proof of concept implemented.
 
 Future Release Milestones
 -----------------------------------
 
-* v0.2  - Add exception handling to server code
-        - Document server code
-        - Fix issues around server redundancy
-        - Add additional devices including server metric tags
-        - Discuss Python implementation for server components
+* v0.2  
 
-* v0.3  - Investigate PLC4X project to use for PLC communication.
+        *       Add exception handling to server code
+        
+        *       Document server code
+        
+        *       Fix issues around server redundancy
+        
+        *       Add additional devices including server metric tags
+        
+        *       Discuss Python implementation for server components
+
+* v0.3  
+
+        *       Investigate PLC4X project to use for PLC communication.
 
 Server Installation
 ===================================
