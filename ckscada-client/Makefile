@@ -1,4 +1,4 @@
-NAME=ckscada-viewer
+NAME=ckscada-client
 VERSION=0.1
 PACKAGE=$(NAME)
 
