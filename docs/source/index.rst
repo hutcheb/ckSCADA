@@ -46,24 +46,7 @@ ckSCADA
 
   index/*
 
-
-ckSCADA is an open source SCADA system built using Kafka as the base for
-all communication.
-
-The primary aim is to be an open source alternate to proprietry SCADA systems.
-It is kept as simple as possible to minimize issues with the code base.
-Yet allows the system to be extended using third party Kafka components.
-
-Kafka is a very well supported framework for messaging between components.
-This allows for the use of existing Kafka connectors to be intgrated.
-
-As kafka is used this allows for the system to be scaled easily.
-Need 100,000 more tags add another couple of servers.
-
-Each component within the system communicates using the kafka broker(s)
-which enables each component to be developed indiviually from the other.
-
-
+.. include:: ../../README.md
 
 
 Indices and tables
