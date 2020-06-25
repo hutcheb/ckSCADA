@@ -2,6 +2,7 @@ Introduction
 ===================================
 
 ckSCADA is an open source SCADA system built using Kafka.
+https://ckscada.readthedocs.io/
 
 The primary aim is to be an open source alternate to proprietry SCADA systems.
 
