@@ -9,7 +9,7 @@
   <text class="cktag" name="Simulated_Flow_Transmitter.Scaled!value" style="fill: 'black'; font-family: &quot;Roboto Slab&quot;; font-size: 12px; white-space: pre;" x="400" y="300"><title>Test</title>####</text>
   <text class="cktag" name="Simulated_Flow_Transmitter.Scaled!eu" style="fill: 'black'; font-family: &quot;Roboto Slab&quot;; font-size: 12px; white-space: pre;" x="420" y="300"><title>Test</title>####</text>
 
-  <image width="50px" height="50px" x="100px" y="100px" class="ckobject" xlink:href="svg/Motor.svg" object="Simulated_Flow_Transmitter"/>
+  <image width="50px" height="50px" x="100px" y="100px" class="ckobject" xlink:href="Motor.svg" object="Simulated_Flow_Transmitter"/>
 
   <text class="cktag" name="Simulated_Flow_Transmitter.Stored!value" style="fill: 'black'; font-family: &quot;Roboto Slab&quot;; font-size: 12px; white-space: pre;" x="500" y="300">
       <title>Test</title>

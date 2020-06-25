@@ -21,12 +21,14 @@
  *
  */
 const common = require("./common.js");
+const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 const { Kafka } = require('kafkajs');
 const anime = require('animejs');
 const fs = require('fs');
 const adminTopic = '_admin.devices'
 var os = require("os");
+var svgPath = "./svg/"
 var hostname = os.hostname();
 var clientId = "client-" + hostname + "-" + uuidv4();
 var consumer = undefined;
@@ -155,7 +157,7 @@ function replaceObjects() {
     ckObjectList = document.getElementsByClassName("ckobject");
 
     for (i=0; i < ckObjectList.length; i ++) {
-        let filename = ckObjectList[i].getAttribute("filename");
+        let filename = getFilePath(ckObjectList[i].getAttribute("xlink:href"));              
         let exists = false;
         exists = fs.existsSync(filename);
 
@@ -353,6 +355,15 @@ async function loop() {
       }})
 }
 
+function getFilePath(filename) {
+  return path.format({
+    root: '/ignored',
+    dir: svgPath,
+    base: filename
+  });
+
+}
+
 /*
  *
  * name:            run
@@ -366,6 +377,7 @@ async function loop() {
 function run(config) {
 
     var config = common.readConfigFile('./config/config.json', true);
+
     const start = async function() {
           kafka = new Kafka({
           clientId: config.clientid,
@@ -381,8 +393,7 @@ function run(config) {
 
         createClient()
 
-        svgfile = './svg/welcome.svg';
-        await changePage(svgfile);
+        await changePage(getFilePath('welcome.svg'));
     }
     start();
 }
