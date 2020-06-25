@@ -25,8 +25,8 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 
 project = u'ckSCADA'
-copyright = u'2020, ckSCADA.org'
-author = u'ckSCADA.org'
+copyright = u'2020, ckSCADA'
+author = u'ckSCADA'
 
 # The short X.Y version
 version = u'0.1'
