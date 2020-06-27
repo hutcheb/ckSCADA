@@ -20,201 +20,14 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 
 import "./App.css";
 import "./test.js";
+import ObjectListComponent from "./ObjectListComponent.js"
+import { renderModalRow, MyVerticallyCenteredModal } from "./ObjectListModal.js"
+import { postFormData, getTopicList } from "./BackendComms.js"
 import Structure from "./structure.js";
 import TestData from "./test.js";
 
 import { render } from "react-dom";
 import axios from "axios";
-
-class ShowObjectList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      schema: props.schema,
-      objectlist: props.objectlist,
-      row: []
-    };
-  }
-
-
-
-  renderTableHead() {
-    let header;
-    let value = [];
-
-    for (header in this.state["schema"]) {
-      value.push(<th>{header}</th>);
-    }
-    return (
-      <thead>
-        <tr>{value}</tr>
-      </thead>
-    );
-  }
-
-  onModalShow(row) {
-    console.log(row);
-  }
-
-  renderTableRow(row) {
-    let value = [];
-    let col;
-
-    for (col in this.state.schema) {
-      value.push(<td>{row[col]}</td>);
-    }
-    return (
-      <tr
-        onClick={() => {
-          this.props.onModalShow();
-          this.setState((state, props) => {
-            return { row: row };
-          });
-        }}
-      >
-        {value}
-      </tr>
-    );
-  }
-
-  renderTableRows() {
-    let row;
-    let value = [];
-    for (row in this.props.objectlist) {
-      value.push(this.renderTableRow(this.props.objectlist[row]));
-    }
-    return <tbody>{value}</tbody>;
-  }
-
-  render() {
-
-    if (this.props.show) {
-      return (
-        <div>
-          <Table
-            class="tableList"
-            show="false"
-            size="sm"
-            striped
-            bordered
-            hover
-            overflow
-            variant="dark"
-          >
-            {this.renderTableHead()}
-            {this.renderTableRows()}
-          </Table>
-          <MyVerticallyCenteredModal
-            topic={this.props.topic}
-            show={this.props.showModal}
-            onHide={this.props.onModalHide}
-            row={this.state.row}
-            col={this.state.schema}
-          />
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-}
-
-function renderModalRow(row, column) {
-  let value = [];
-  let col;
-
-  for (col in column) {
-    value.push(
-      <InputGroup className="mb-3 modalinputclass">
-        <InputGroup.Prepend>
-          <InputGroup.Text id="basic-addon1">{col}</InputGroup.Text>
-        </InputGroup.Prepend>
-        <FormControl
-          id="value"
-          placeholder={row[col]}
-          aria-label={col}
-          aria-describedby={col}
-        />
-      </InputGroup>
-    );
-  }
-  return <div>{value}</div>;
-}
-
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {props.row.name}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{renderModalRow(props.row, props.col)}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="danger" onClick={(ref) => {
-          let r = ref.target.parentElement.parentElement.getElementsByClassName('modalinputclass')
-          let row;
-          let data = {};
-          for (row in r) {
-            if (typeof(r[row]) === "object") {
-              let tempRow = r[row];
-              if (tempRow.children[1].value === "") {
-                data[tempRow.children[0].textContent] = tempRow.children[1].getAttribute("placeholder");
-              } else {
-                data[tempRow.children[0].textContent] = tempRow.children[1].value
-              }
-
-            }
-          }
-          postFormData(props.topic, data, 'del');
-          props.onHide();
-        }}>Delete</Button>
-        <Button variant="primary" onClick={props.onHide}>Discard Changes</Button>
-        <Button variant="primary" onClick={(ref) => {
-          let r = ref.target.parentElement.parentElement.getElementsByClassName('modalinputclass')
-          let row;
-          let data = {};
-          for (row in r) {
-            if (typeof(r[row]) === "object") {
-              let tempRow = r[row];
-              if (tempRow.children[1].value === "") {
-                data[tempRow.children[0].textContent] = tempRow.children[1].getAttribute("placeholder");
-              } else {
-                data[tempRow.children[0].textContent] = tempRow.children[1].value
-              }
-
-            }
-          }
-          postFormData(props.topic, data, 'add');
-          props.onHide();
-        }}>
-          Save Changes</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
-
-async function postFormData(topic, data, cmd) {
-  axios({
-      method: 'post',
-      url: 'http://localhost:3000/api/' + topic + "/" + cmd,
-      data: data,
-      });
-}
-
-function getTopicList(topic, filter, callback, setProgress) {
-  axios.get('http://localhost:3000/api/' + topic + '?filter=' + filter).then(resp => {
-    callback(resp.data);
-    setProgress("");
-  });
-}
 
 function App() {
   const [modalShow, setModalShow] = React.useState(false);
@@ -409,7 +222,7 @@ function App() {
                   <Row>
                     <Col>
                       <div class="content-display-overcontainer">
-                      <ShowObjectList
+                      <ObjectListComponent
                         schema={Structure.pointListStructure}
                         objectlist={pointsList}
                         show={pointsShow}
@@ -421,7 +234,7 @@ function App() {
                         onModalShow={() => setModalShow(true)}
                         onModalHide={() => setModalShow(false)}
                       />
-                      <ShowObjectList
+                      <ObjectListComponent
                         schema={Structure.groupListStructure}
                         objectlist={groupsList}
                         show={groupsShow}
@@ -433,7 +246,7 @@ function App() {
                         onModalShow={() => setModalShow(true)}
                         onModalHide={() => setModalShow(false)}
                       />
-                      <ShowObjectList
+                      <ObjectListComponent
                         schema={Structure.deviceListStructure}
                         objectlist={devicesList}
                         show={devicesShow}
@@ -445,7 +258,7 @@ function App() {
                         onModalShow={() => setModalShow(true)}
                         onModalHide={() => setModalShow(false)}
                       />
-                      <ShowObjectList
+                      <ObjectListComponent
                         schema={Structure.topicListStructure}
                         objectlist={topicsList}
                         show={topicsShow}
@@ -457,7 +270,7 @@ function App() {
                         onModalShow={() => setModalShow(true)}
                         onModalHide={() => setModalShow(false)}
                       />
-                      <ShowObjectList
+                      <ObjectListComponent
                         schema={Structure.clientListStructure}
                         objectlist={clientsList}
                         show={clientsShow}
