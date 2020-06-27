@@ -20,9 +20,8 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 
 import "./App.css";
 import "./test.js";
-import ObjectListComponent from "./ObjectListComponent.js"
-import { renderModalRow, MyVerticallyCenteredModal } from "./ObjectListModal.js"
-import { postFormData, getTopicList } from "./BackendComms.js"
+import ObjectListComponent from "./ObjectListComponent.js";
+import { postFormData, getTopicList } from "./BackendComms.js";
 import Structure from "./structure.js";
 import TestData from "./test.js";
 

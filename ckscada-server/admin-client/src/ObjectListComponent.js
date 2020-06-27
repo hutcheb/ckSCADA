@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
-import { renderModalRow, MyVerticallyCenteredModal } from "./ObjectListModal.js"
+import { ObjectListModal } from "./ObjectListModal.js"
 
 class ObjectListComponent extends React.Component {
   constructor(props) {
@@ -79,7 +79,7 @@ class ObjectListComponent extends React.Component {
             {this.renderTableHead()}
             {this.renderTableRows()}
           </Table>
-          <MyVerticallyCenteredModal
+          <ObjectListModal
             topic={this.props.topic}
             show={this.props.showModal}
             onHide={this.props.onModalHide}
