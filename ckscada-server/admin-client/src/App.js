@@ -19,211 +19,23 @@ import InputGroup from "react-bootstrap/InputGroup";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
 import "./App.css";
-import "./test.js";
-import Structure from "./structure.js";
-import TestData from "./test.js";
+import PointListComponent from "./PointListComponent.js";
+import GroupListComponent from "./GroupListComponent.js";
+import DeviceListComponent from "./DeviceListComponent.js";
+import TopicListComponent from "./TopicListComponent.js";
+import ClientListComponent from "./ClientListComponent.js";
+import { postFormData, getTopicList } from "./BackendComms.js";
 
 import { render } from "react-dom";
 import axios from "axios";
 
-class ShowObjectList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      schema: props.schema,
-      objectlist: props.objectlist,
-      row: []
-    };
-  }
-
-
-
-  renderTableHead() {
-    let header;
-    let value = [];
-
-    for (header in this.state["schema"]) {
-      value.push(<th>{header}</th>);
-    }
-    return (
-      <thead>
-        <tr>{value}</tr>
-      </thead>
-    );
-  }
-
-  onModalShow(row) {
-    console.log(row);
-  }
-
-  renderTableRow(row) {
-    let value = [];
-    let col;
-
-    for (col in this.state.schema) {
-      value.push(<td>{row[col]}</td>);
-    }
-    return (
-      <tr
-        onClick={() => {
-          this.props.onModalShow();
-          this.setState((state, props) => {
-            return { row: row };
-          });
-        }}
-      >
-        {value}
-      </tr>
-    );
-  }
-
-  renderTableRows() {
-    let row;
-    let value = [];
-    for (row in this.props.objectlist) {
-      value.push(this.renderTableRow(this.props.objectlist[row]));
-    }
-    return <tbody>{value}</tbody>;
-  }
-
-  render() {
-
-    if (this.props.show) {
-      return (
-        <div>
-          <Table
-            class="tableList"
-            show="false"
-            size="sm"
-            striped
-            bordered
-            hover
-            overflow
-            variant="dark"
-          >
-            {this.renderTableHead()}
-            {this.renderTableRows()}
-          </Table>
-          <MyVerticallyCenteredModal
-            topic={this.props.topic}
-            show={this.props.showModal}
-            onHide={this.props.onModalHide}
-            row={this.state.row}
-            col={this.state.schema}
-          />
-        </div>
-      );
-    } else {
-      return null;
-    }
-  }
-}
-
-function renderModalRow(row, column) {
-  let value = [];
-  let col;
-
-  for (col in column) {
-    value.push(
-      <InputGroup className="mb-3 modalinputclass">
-        <InputGroup.Prepend>
-          <InputGroup.Text id="basic-addon1">{col}</InputGroup.Text>
-        </InputGroup.Prepend>
-        <FormControl
-          id="value"
-          placeholder={row[col]}
-          aria-label={col}
-          aria-describedby={col}
-        />
-      </InputGroup>
-    );
-  }
-  return <div>{value}</div>;
-}
-
-function MyVerticallyCenteredModal(props) {
-  return (
-    <Modal
-      {...props}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          {props.row.name}
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>{renderModalRow(props.row, props.col)}</Modal.Body>
-      <Modal.Footer>
-        <Button variant="danger" onClick={(ref) => {
-          let r = ref.target.parentElement.parentElement.getElementsByClassName('modalinputclass')
-          let row;
-          let data = {};
-          for (row in r) {
-            if (typeof(r[row]) === "object") {
-              let tempRow = r[row];
-              if (tempRow.children[1].value === "") {
-                data[tempRow.children[0].textContent] = tempRow.children[1].getAttribute("placeholder");
-              } else {
-                data[tempRow.children[0].textContent] = tempRow.children[1].value
-              }
-
-            }
-          }
-          postFormData(props.topic, data, 'del');
-          props.onHide();
-        }}>Delete</Button>
-        <Button variant="primary" onClick={props.onHide}>Discard Changes</Button>
-        <Button variant="primary" onClick={(ref) => {
-          let r = ref.target.parentElement.parentElement.getElementsByClassName('modalinputclass')
-          let row;
-          let data = {};
-          for (row in r) {
-            if (typeof(r[row]) === "object") {
-              let tempRow = r[row];
-              if (tempRow.children[1].value === "") {
-                data[tempRow.children[0].textContent] = tempRow.children[1].getAttribute("placeholder");
-              } else {
-                data[tempRow.children[0].textContent] = tempRow.children[1].value
-              }
-
-            }
-          }
-          postFormData(props.topic, data, 'add');
-          props.onHide();
-        }}>
-          Save Changes</Button>
-      </Modal.Footer>
-    </Modal>
-  );
-}
-
-
-async function postFormData(topic, data, cmd) {
-  axios({
-      method: 'post',
-      url: 'http://localhost:3000/api/' + topic + "/" + cmd,
-      data: data,
-      });
-}
-
-function getTopicList(topic, filter, callback, setProgress) {
-  axios.get('http://localhost:3000/api/' + topic + '?filter=' + filter).then(resp => {
-    callback(resp.data);
-    setProgress("");
-  });
-}
-
 function App() {
-  const [modalShow, setModalShow] = React.useState(false);
-  const [pointsShow, setPointsShow] = React.useState(false);
-  const [objectsShow, setObjectsShow] = React.useState(false);
-  const [devicesShow, setDevicesShow] = React.useState(false);
-  const [topicsShow, setTopicsShow] = React.useState(false);
-  const [groupsShow, setGroupsShow] = React.useState(false);
-  const [clientsShow, setClientsShow] = React.useState(false);
+  const PointListDisplayRef = React.createRef();
+  const GroupListDisplayRef = React.createRef();
+  const DeviceListDisplayRef = React.createRef();
+  const TopicListDisplayRef = React.createRef();
+  const ClientListDisplayRef = React.createRef();
+
   const [addButtonShow, setAddButtonShow] = React.useState("hidden");
   const [progress, setProgress] = React.useState("");
   const [topicsList, setTopicsList] = React.useState([{name:'Use Search Bar..'}]);
@@ -234,16 +46,16 @@ function App() {
   const [pageFilter, setFilter] = React.useState("")
 
   document.addEventListener('copy', function(e) {
-    if (pointsShow) {
+    if (PointListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(pointsList));
-    } else if (devicesShow) {
+    } else if (DeviceListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(devicesList));
-    } else if (topicsShow) {
+    } else if (TopicListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(topicsList));
-    } else if (groupsShow) {
+    } else if (GroupListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(groupsList));
     }
-    else if (clientsShow) {
+    else if (ClientListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(groupsList));
     }
     console.log("Copied to Clipboard")
@@ -294,7 +106,7 @@ function App() {
                 id="basic-navbar-nav"
                 className="justify-content-end"
               >
-                <Button onClick={(ref) => {setModalShow(true)}}
+                <Button onClick={(ref) => {}}
 
                  style={{visibility: addButtonShow}}>Add+</Button>
               </Navbar.Collapse>
@@ -320,11 +132,11 @@ function App() {
                           <Accordion.Collapse eventKey="0">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(true);
-                                setGroupsShow(false);
-                                setDevicesShow(false);
-                                setTopicsShow(false);
-                                setClientsShow(false);
+                                PointListDisplayRef.current.setShow(true);
+                                GroupListDisplayRef.current.setShow(false);
+                                DeviceListDisplayRef.current.setShow(false);
+                                TopicListDisplayRef.current.setShow(false);
+                                ClientListDisplayRef.current.setShow(false);
                                 setAddButtonShow("visible");
                               }}
                             >
@@ -334,11 +146,11 @@ function App() {
                           <Accordion.Collapse eventKey="0">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(false);
-                                setGroupsShow(false);
-                                setDevicesShow(true);
-                                setTopicsShow(false);
-                                setClientsShow(false);
+                                PointListDisplayRef.current.setShow(false);
+                                GroupListDisplayRef.current.setShow(false);
+                                DeviceListDisplayRef.current.setShow(true);
+                                TopicListDisplayRef.current.setShow(false);
+                                ClientListDisplayRef.current.setShow(false);
                                 setAddButtonShow("visible");
                               }}
                             >
@@ -348,11 +160,11 @@ function App() {
                           <Accordion.Collapse eventKey="0">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(false);
-                                setGroupsShow(false);
-                                setDevicesShow(false);
-                                setTopicsShow(false);
-                                setClientsShow(true);
+                                PointListDisplayRef.current.setShow(false);
+                                GroupListDisplayRef.current.setShow(false);
+                                DeviceListDisplayRef.current.setShow(false);
+                                TopicListDisplayRef.current.setShow(false);
+                                ClientListDisplayRef.current.setShow(true);
                                 setAddButtonShow("hidden");
                               }}
                             >
@@ -367,11 +179,11 @@ function App() {
                           <Accordion.Collapse eventKey="1">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(false);
-                                setGroupsShow(false);
-                                setDevicesShow(false);
-                                setTopicsShow(true);
-                                setClientsShow(false);
+                                PointListDisplayRef.current.setShow(false);
+                                GroupListDisplayRef.current.setShow(false);
+                                DeviceListDisplayRef.current.setShow(false);
+                                TopicListDisplayRef.current.setShow(true);
+                                ClientListDisplayRef.current.setShow(false);
                                 setAddButtonShow("hidden");
                               }}
                             >
@@ -381,11 +193,11 @@ function App() {
                           <Accordion.Collapse eventKey="1">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(false);
-                                setGroupsShow(true);
-                                setDevicesShow(false);
-                                setTopicsShow(false);
-                                setClientsShow(false);
+                                PointListDisplayRef.current.setShow(false);
+                                GroupListDisplayRef.current.setShow(true);
+                                DeviceListDisplayRef.current.setShow(false);
+                                TopicListDisplayRef.current.setShow(false);
+                                ClientListDisplayRef.current.setShow(false);
                                 setAddButtonShow("hidden");
                               }}
                             >
@@ -409,66 +221,21 @@ function App() {
                   <Row>
                     <Col>
                       <div class="content-display-overcontainer">
-                      <ShowObjectList
-                        schema={Structure.pointListStructure}
-                        objectlist={pointsList}
-                        show={pointsShow}
-                        topic={"points"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setPointsShow(true)}
-                        onPointsHide={() => setPointsShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
-                      <ShowObjectList
-                        schema={Structure.groupListStructure}
-                        objectlist={groupsList}
-                        show={groupsShow}
-                        topic={"groups"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setGroupsShow(true)}
-                        onPointsHide={() => setGroupsShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
-                      <ShowObjectList
-                        schema={Structure.deviceListStructure}
-                        objectlist={devicesList}
-                        show={devicesShow}
-                        topic={"devices"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setDevicesShow(true)}
-                        onPointsHide={() => setDevicesShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
-                      <ShowObjectList
-                        schema={Structure.topicListStructure}
-                        objectlist={topicsList}
-                        show={topicsShow}
-                        topic={"topics"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setTopicsShow(true)}
-                        onPointsHide={() => setTopicsShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
-                      <ShowObjectList
-                        schema={Structure.clientListStructure}
-                        objectlist={clientsList}
-                        show={clientsShow}
-                        topic={"clients"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setClientsShow(true)}
-                        onPointsHide={() => setClientsShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
+                        <PointListComponent
+                          objectlist={pointsList}
+                          ref={PointListDisplayRef}/>
+                        <GroupListComponent
+                          objectlist={groupsList}
+                          ref={GroupListDisplayRef}/>
+                        <DeviceListComponent
+                          objectlist={devicesList}
+                          ref={DeviceListDisplayRef}/>
+                        <TopicListComponent
+                          objectlist={topicsList}
+                          ref={TopicListDisplayRef}/>
+                        <ClientListComponent
+                          objectlist={clientsList}
+                          ref={ClientListDisplayRef}/>
                       </div>
                     </Col>
                   </Row>
@@ -493,23 +260,23 @@ function App() {
                   onLoad={ref => { getTopicList("topics", ref.target.value, setTopicsList); getTopicList("points", ref.target.value, setTopicsList)}}
                   onKeyPress={ref => {
                     if (ref.key == 'Enter') {
-                      if (topicsShow == true) {
+                      if (TopicListDisplayRef.current.state.show == true) {
                         setProgress("Loading Topics...");
                         getTopicList("topics", ref.target.value, setTopicsList, setProgress)
                       }
-                      if (pointsShow == true) {
+                      if (PointListDisplayRef.current.state.show == true) {
                         setProgress("Loading Points...");
                         getTopicList("points", ref.target.value, setPointsList, setProgress)
                       }
-                      if (groupsShow == true) {
+                      if (GroupListDisplayRef.current.state.show == true) {
                         setProgress("Loading Groups...");
                         getTopicList("groups", ref.target.value, setGroupsList, setProgress)
                       }
-                      if (devicesShow == true) {
+                      if (DeviceListDisplayRef.current.state.show == true) {
                         setProgress("Loading Devices...");
                         getTopicList("devices", ref.target.value, setDevicesList, setProgress)
                       }
-                      if (clientsShow == true) {
+                      if (ClientListDisplayRef.current.state.show == true) {
                         setProgress("Loading Clients...");
                         getTopicList("clients", ref.target.value, setClientsList, setProgress)
                       }
