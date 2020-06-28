@@ -5,19 +5,28 @@ import { ObjectListModal } from "./ObjectListModal.js"
 class ObjectListComponent extends React.Component {
   constructor(props) {
     super(props);
+    this.setModalShow = this.setModalShow.bind(this);
 
     this.state = {
-      schema: props.schema,
-      objectlist: props.objectlist,
-      row: []
+      row: [],
+      show: false,
+      modalShow: false
     };
+  }
+
+  setModalShow(status) {
+    this.setState({ modalShow: status });
+  }
+
+  setShow(status) {
+    this.setState({ show: status });
   }
 
   renderTableHead() {
     let header;
     let value = [];
 
-    for (header in this.state["schema"]) {
+    for (header in this.state.schema) {
       value.push(<th>{header}</th>);
     }
     return (
@@ -25,10 +34,6 @@ class ObjectListComponent extends React.Component {
         <tr>{value}</tr>
       </thead>
     );
-  }
-
-  onModalShow(row) {
-    console.log(row);
   }
 
   renderTableRow(row) {
@@ -41,7 +46,7 @@ class ObjectListComponent extends React.Component {
     return (
       <tr
         onClick={() => {
-          this.props.onModalShow();
+          this.setModalShow(true);
           this.setState((state, props) => {
             return { row: row };
           });
@@ -62,8 +67,7 @@ class ObjectListComponent extends React.Component {
   }
 
   render() {
-
-    if (this.props.show) {
+    if (this.state.show) {
       return (
         <div>
           <Table
@@ -80,9 +84,9 @@ class ObjectListComponent extends React.Component {
             {this.renderTableRows()}
           </Table>
           <ObjectListModal
-            topic={this.props.topic}
-            show={this.props.showModal}
-            onHide={this.props.onModalHide}
+            topic={this.state.topic}
+            show={this.state.modalShow}
+            onHide={this.setModalShow}
             row={this.state.row}
             col={this.state.schema}
           />

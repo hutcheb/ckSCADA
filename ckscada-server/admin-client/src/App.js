@@ -19,23 +19,23 @@ import InputGroup from "react-bootstrap/InputGroup";
 import ProgressBar from "react-bootstrap/ProgressBar";
 
 import "./App.css";
-import "./test.js";
-import ObjectListComponent from "./ObjectListComponent.js";
+import PointListComponent from "./PointListComponent.js";
+import GroupListComponent from "./GroupListComponent.js";
+import DeviceListComponent from "./DeviceListComponent.js";
+import TopicListComponent from "./TopicListComponent.js";
+import ClientListComponent from "./ClientListComponent.js";
 import { postFormData, getTopicList } from "./BackendComms.js";
-import Structure from "./structure.js";
-import TestData from "./test.js";
 
 import { render } from "react-dom";
 import axios from "axios";
 
 function App() {
-  const [modalShow, setModalShow] = React.useState(false);
-  const [pointsShow, setPointsShow] = React.useState(false);
-  const [objectsShow, setObjectsShow] = React.useState(false);
-  const [devicesShow, setDevicesShow] = React.useState(false);
-  const [topicsShow, setTopicsShow] = React.useState(false);
-  const [groupsShow, setGroupsShow] = React.useState(false);
-  const [clientsShow, setClientsShow] = React.useState(false);
+  const PointListDisplayRef = React.createRef();
+  const GroupListDisplayRef = React.createRef();
+  const DeviceListDisplayRef = React.createRef();
+  const TopicListDisplayRef = React.createRef();
+  const ClientListDisplayRef = React.createRef();
+
   const [addButtonShow, setAddButtonShow] = React.useState("hidden");
   const [progress, setProgress] = React.useState("");
   const [topicsList, setTopicsList] = React.useState([{name:'Use Search Bar..'}]);
@@ -46,16 +46,16 @@ function App() {
   const [pageFilter, setFilter] = React.useState("")
 
   document.addEventListener('copy', function(e) {
-    if (pointsShow) {
+    if (PointListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(pointsList));
-    } else if (devicesShow) {
+    } else if (DeviceListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(devicesList));
-    } else if (topicsShow) {
+    } else if (TopicListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(topicsList));
-    } else if (groupsShow) {
+    } else if (GroupListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(groupsList));
     }
-    else if (clientsShow) {
+    else if (ClientListDisplayRef.state.show) {
       e.clipboardData.setData('text/plain', JSON.stringify(groupsList));
     }
     console.log("Copied to Clipboard")
@@ -106,7 +106,7 @@ function App() {
                 id="basic-navbar-nav"
                 className="justify-content-end"
               >
-                <Button onClick={(ref) => {setModalShow(true)}}
+                <Button onClick={(ref) => {}}
 
                  style={{visibility: addButtonShow}}>Add+</Button>
               </Navbar.Collapse>
@@ -132,11 +132,11 @@ function App() {
                           <Accordion.Collapse eventKey="0">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(true);
-                                setGroupsShow(false);
-                                setDevicesShow(false);
-                                setTopicsShow(false);
-                                setClientsShow(false);
+                                PointListDisplayRef.current.setShow(true);
+                                GroupListDisplayRef.current.setShow(false);
+                                DeviceListDisplayRef.current.setShow(false);
+                                TopicListDisplayRef.current.setShow(false);
+                                ClientListDisplayRef.current.setShow(false);
                                 setAddButtonShow("visible");
                               }}
                             >
@@ -146,11 +146,11 @@ function App() {
                           <Accordion.Collapse eventKey="0">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(false);
-                                setGroupsShow(false);
-                                setDevicesShow(true);
-                                setTopicsShow(false);
-                                setClientsShow(false);
+                                PointListDisplayRef.current.setShow(false);
+                                GroupListDisplayRef.current.setShow(false);
+                                DeviceListDisplayRef.current.setShow(true);
+                                TopicListDisplayRef.current.setShow(false);
+                                ClientListDisplayRef.current.setShow(false);
                                 setAddButtonShow("visible");
                               }}
                             >
@@ -160,11 +160,11 @@ function App() {
                           <Accordion.Collapse eventKey="0">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(false);
-                                setGroupsShow(false);
-                                setDevicesShow(false);
-                                setTopicsShow(false);
-                                setClientsShow(true);
+                                PointListDisplayRef.current.setShow(false);
+                                GroupListDisplayRef.current.setShow(false);
+                                DeviceListDisplayRef.current.setShow(false);
+                                TopicListDisplayRef.current.setShow(false);
+                                ClientListDisplayRef.current.setShow(true);
                                 setAddButtonShow("hidden");
                               }}
                             >
@@ -179,11 +179,11 @@ function App() {
                           <Accordion.Collapse eventKey="1">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(false);
-                                setGroupsShow(false);
-                                setDevicesShow(false);
-                                setTopicsShow(true);
-                                setClientsShow(false);
+                                PointListDisplayRef.current.setShow(false);
+                                GroupListDisplayRef.current.setShow(false);
+                                DeviceListDisplayRef.current.setShow(false);
+                                TopicListDisplayRef.current.setShow(true);
+                                ClientListDisplayRef.current.setShow(false);
                                 setAddButtonShow("hidden");
                               }}
                             >
@@ -193,11 +193,11 @@ function App() {
                           <Accordion.Collapse eventKey="1">
                             <Card.Body
                               onClick={() => {
-                                setPointsShow(false);
-                                setGroupsShow(true);
-                                setDevicesShow(false);
-                                setTopicsShow(false);
-                                setClientsShow(false);
+                                PointListDisplayRef.current.setShow(false);
+                                GroupListDisplayRef.current.setShow(true);
+                                DeviceListDisplayRef.current.setShow(false);
+                                TopicListDisplayRef.current.setShow(false);
+                                ClientListDisplayRef.current.setShow(false);
                                 setAddButtonShow("hidden");
                               }}
                             >
@@ -221,66 +221,21 @@ function App() {
                   <Row>
                     <Col>
                       <div class="content-display-overcontainer">
-                      <ObjectListComponent
-                        schema={Structure.pointListStructure}
-                        objectlist={pointsList}
-                        show={pointsShow}
-                        topic={"points"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setPointsShow(true)}
-                        onPointsHide={() => setPointsShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
-                      <ObjectListComponent
-                        schema={Structure.groupListStructure}
-                        objectlist={groupsList}
-                        show={groupsShow}
-                        topic={"groups"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setGroupsShow(true)}
-                        onPointsHide={() => setGroupsShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
-                      <ObjectListComponent
-                        schema={Structure.deviceListStructure}
-                        objectlist={devicesList}
-                        show={devicesShow}
-                        topic={"devices"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setDevicesShow(true)}
-                        onPointsHide={() => setDevicesShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
-                      <ObjectListComponent
-                        schema={Structure.topicListStructure}
-                        objectlist={topicsList}
-                        show={topicsShow}
-                        topic={"topics"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setTopicsShow(true)}
-                        onPointsHide={() => setTopicsShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
-                      <ObjectListComponent
-                        schema={Structure.clientListStructure}
-                        objectlist={clientsList}
-                        show={clientsShow}
-                        topic={"clients"}
-                        pageFilter={pageFilter}
-                        onPointsShow={() => setClientsShow(true)}
-                        onPointsHide={() => setClientsShow(false)}
-                        showModal={modalShow}
-                        onModalShow={() => setModalShow(true)}
-                        onModalHide={() => setModalShow(false)}
-                      />
+                        <PointListComponent
+                          objectlist={pointsList}
+                          ref={PointListDisplayRef}/>
+                        <GroupListComponent
+                          objectlist={groupsList}
+                          ref={GroupListDisplayRef}/>
+                        <DeviceListComponent
+                          objectlist={devicesList}
+                          ref={DeviceListDisplayRef}/>
+                        <TopicListComponent
+                          objectlist={topicsList}
+                          ref={TopicListDisplayRef}/>
+                        <ClientListComponent
+                          objectlist={clientsList}
+                          ref={ClientListDisplayRef}/>
                       </div>
                     </Col>
                   </Row>
@@ -305,23 +260,23 @@ function App() {
                   onLoad={ref => { getTopicList("topics", ref.target.value, setTopicsList); getTopicList("points", ref.target.value, setTopicsList)}}
                   onKeyPress={ref => {
                     if (ref.key == 'Enter') {
-                      if (topicsShow == true) {
+                      if (TopicListDisplayRef.current.state.show == true) {
                         setProgress("Loading Topics...");
                         getTopicList("topics", ref.target.value, setTopicsList, setProgress)
                       }
-                      if (pointsShow == true) {
+                      if (PointListDisplayRef.current.state.show == true) {
                         setProgress("Loading Points...");
                         getTopicList("points", ref.target.value, setPointsList, setProgress)
                       }
-                      if (groupsShow == true) {
+                      if (GroupListDisplayRef.current.state.show == true) {
                         setProgress("Loading Groups...");
                         getTopicList("groups", ref.target.value, setGroupsList, setProgress)
                       }
-                      if (devicesShow == true) {
+                      if (DeviceListDisplayRef.current.state.show == true) {
                         setProgress("Loading Devices...");
                         getTopicList("devices", ref.target.value, setDevicesList, setProgress)
                       }
-                      if (clientsShow == true) {
+                      if (ClientListDisplayRef.current.state.show == true) {
                         setProgress("Loading Clients...");
                         getTopicList("clients", ref.target.value, setClientsList, setProgress)
                       }

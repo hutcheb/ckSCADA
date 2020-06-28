@@ -26,15 +26,11 @@ class ObjectListModal extends React.Component {
 
     this.state = {
       topic: props.topic,
-      show: props.show,
-      onHide: props.onHide,
-      row: props.row,
-      col: props.col
+      onHide: props.onHide
     };
   }
 
   render() {
-
     if (this.props.show) {
       return (
         <Modal
@@ -51,7 +47,7 @@ class ObjectListModal extends React.Component {
           <Modal.Body>{this.renderModalRow(this.props.row, this.props.col)}</Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={(ref) => {this.buttonOnClick(ref, 'del')}}>Delete</Button>
-            <Button variant="primary" onClick={this.props.onHide}>Discard Changes</Button>
+            <Button variant="primary" onClick={(ref) => {this.props.onHide(false)}}>Discard Changes</Button>
             <Button variant="primary" onClick={(ref) => {this.buttonOnClick(ref, 'add')}}>Save Changes</Button>
           </Modal.Footer>
         </Modal>
@@ -76,8 +72,8 @@ class ObjectListModal extends React.Component {
 
       }
     }
-    postFormData(this.props.topic, data, cmd);
-    this.props.onHide();
+    postFormData(this.state.topic, data, cmd);
+    this.state.onHide(false);
   }
 
   renderModalRow(row, column) {
