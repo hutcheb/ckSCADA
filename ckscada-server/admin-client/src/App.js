@@ -154,6 +154,16 @@ class App extends React.Component {
                       <div class="project-heading">
                         <Accordion defaultActiveKey="1">
                           <Card>
+                            <Form onSubmit={e => { e.preventDefault(); }}>
+                              <FormControl                                
+                                inputRef={this.state.pageFilter}
+                                onKeyPress={ref => {this.queryFilteredList(ref);}}
+                                type="text"
+                                placeholder="Search"
+                              />
+                            </Form>
+                          </Card>
+                          <Card>
                             <Accordion.Toggle as={Card.Header} eventKey="0">
                               Project
                             </Accordion.Toggle>
@@ -233,20 +243,6 @@ class App extends React.Component {
             <Navbar variant="dark" sticky="bottom">
               <Navbar.Brand id="status_bar" href="#home">{this.state.progress}</Navbar.Brand>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse
-                id="basic-navbar-nav"
-                className="justify-content-end"
-              >
-                <Form inline onSubmit={e => { e.preventDefault(); }}>
-                  <FormControl
-                    inputRef={this.state.pageFilter}
-                    onKeyPress={ref => {this.queryFilteredList(ref);}}
-                    type="text"
-                    placeholder="Search"
-                    className=" mr-sm-2"
-                  />
-                </Form>
-              </Navbar.Collapse>
             </Navbar>
           </Col>
         </Row>
