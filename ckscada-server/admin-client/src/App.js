@@ -129,11 +129,7 @@ class App extends React.Component {
                       </NavDropdown.Item>
                       <NavDropdown.Item href="#action/3.2">
                         Import
-                      </NavDropdown.Item>
-                      <NavDropdown.Divider />
-                      <NavDropdown.Item href="#action/3.3">
-                        Close
-                      </NavDropdown.Item>
+                      </NavDropdown.Item>                      
                     </NavDropdown>
                     <NavDropdown title="Edit" id="basic-nav-dropdown">
                       <NavDropdown.Item
