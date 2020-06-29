@@ -131,21 +131,6 @@ class App extends React.Component {
                         Import
                       </NavDropdown.Item>                      
                     </NavDropdown>
-                    <NavDropdown title="Edit" id="basic-nav-dropdown">
-                      <NavDropdown.Item
-                      onClick={ () => {
-                        document.copy(JSON.stringify(this.state.pointsList))
-                        var copyEvent = new ClipboardEvent('copy');
-                        console.log(JSON.stringify(this.state.pointsList))
-                        //pasteEvent.clipboardData.items.add('My string', 'text/plain');
-                        document.dispatchEvent(copyEvent);
-                      }}
-                      href="#action/3.1">Copy</NavDropdown.Item>
-                      <NavDropdown.Item href="#action/3.2">Cut</NavDropdown.Item>
-                      <NavDropdown.Item href="#action/3.2">
-                        Paster
-                      </NavDropdown.Item>
-                    </NavDropdown>
                   </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
