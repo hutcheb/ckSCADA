@@ -11,7 +11,8 @@ async function postFormData(topic, data, cmd) {
 function getTopicList(topic, filter, callback, setProgress) {
   axios.get('http://localhost:3000/api/' + topic + '?filter=' + filter).then(resp => {
     callback(resp.data);
-    setProgress("");
+    let topicString = topic.substring(0, 1).toUpperCase() + topic.substring(1);
+    setProgress("Found " + resp.data.length + " " + topicString + ".");
   });
 }
 
