@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 function logProps(Component) {
   class LogProps extends React.Component {
