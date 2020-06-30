@@ -8,6 +8,11 @@ async function postFormData(topic, data, cmd) {
       });
 }
 
+/**
+ * Return the ratio of the inline text length of the links in an element to
+ * the inline text length of the entire element.
+ *
+ */
 function getTopicList(topic, filter, callback, setProgress) {
   axios.get('http://localhost:3000/api/' + topic + '?filter=' + filter).then(resp => {
     callback(resp.data);

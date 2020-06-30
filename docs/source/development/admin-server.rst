@@ -1,10 +1,14 @@
-.. ckSCADA Installation Client
+.. ckSCADA Admin-Server Documentation
 
-Client Installation
-===================================
+Admin-Server
+=========================================
 
-This is the client installation
+.. automodule:: ckadminserver
+  :members:
+  :undoc-members:
+  :noindex:
 
-.. code-block:: javascript
-
-    console.log("Hello")
+.. automodule:: ckadmincommon
+  :members:
+  :undoc-members:
+  :noindex:

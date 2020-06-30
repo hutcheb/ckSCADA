@@ -1,6 +1,6 @@
 .. ckSCADA Development Server
 
-Server API
+Server
 ===================================
 
 The server package provides the basic functionality of getting data from

@@ -46,8 +46,6 @@ ckSCADA
 
   index/*
 
-.. include:: ../../README.md
-
 
 Indices and tables
 ==================

@@ -14,7 +14,7 @@
 #
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../..'))
+#sys.path.insert(0, os.path.abspath('../..'))
 sys.path.insert(0, os.path.abspath('../../ckscada-client/bin'))
 sys.path.insert(0, os.path.abspath('../../ckscada-server/admin-client/src'))
 sys.path.insert(0, os.path.abspath('../../ckscada-server/server/src'))
@@ -51,8 +51,8 @@ extensions = [
     'sphinx_js'
 ]
 
-root_for_relative_js_paths = '..'
-js_source_path = ['../../ckscada-client/bin','../../ckscada-server/admin-client/src','../../ckscada-server/server/src']
+root_for_relative_js_paths = '../../'
+js_source_path = '../ckscada-server/admin-client/src'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -143,7 +143,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (master_doc, 'ckSCADA.tex', u'ckSCADA Documentation',
-     u'Ben Hutcheson', 'manual'),
+     u'ckSCADA', 'manual'),
 ]
 
 

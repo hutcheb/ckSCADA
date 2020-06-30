@@ -20,7 +20,17 @@ import TopicListComponent from "./TopicListComponent.js";
 import ClientListComponent from "./ClientListComponent.js";
 import { getTopicList } from "./BackendComms.js";
 
+/**
+ * Return the ratio of the inline text length of the links in an element to
+ * the inline text length of the entire element.
+ *
+ */
 class App extends React.Component {
+  /**
+   * Return the ratio of the inline text length of the links in an element to
+   * the inline text length of the entire element.
+   *
+   */
   constructor(props) {
     super (props);
 
@@ -242,24 +252,24 @@ class App extends React.Component {
   }
 
   queryFilteredList(ref) {
-    if (ref.key == 'Enter') {
-      if (this.state.TopicListDisplayRef.current.state.show == true) {
+    if (ref.key === 'Enter') {
+      if (this.state.TopicListDisplayRef.current.state.show === true) {
         this.setProgress("Loading Topics...");
         getTopicList("topics", ref.target.value, this.setTopicsList, this.setProgress)
       }
-      if (this.state.PointListDisplayRef.current.state.show == true) {
+      if (this.state.PointListDisplayRef.current.state.show === true) {
         this.setProgress("Loading Points...");
         getTopicList("points", ref.target.value, this.setPointsList, this.setProgress)
       }
-      if (this.state.GroupListDisplayRef.current.state.show == true) {
+      if (this.state.GroupListDisplayRef.current.state.show === true) {
         this.setProgress("Loading Groups...");
         getTopicList("groups", ref.target.value, this.setGroupsList, this.setProgress)
       }
-      if (this.state.DeviceListDisplayRef.current.state.show == true) {
+      if (this.state.DeviceListDisplayRef.current.state.show === true) {
         this.setProgress("Loading Devices...");
         getTopicList("devices", ref.target.value, this.setDevicesList, this.setProgress)
       }
-      if (this.state.ClientListDisplayRef.current.state.show == true) {
+      if (this.state.ClientListDisplayRef.current.state.show === true) {
         this.setProgress("Loading Clients...");
         getTopicList("clients", ref.target.value, this.setClientsList, this.setProgress)
       }

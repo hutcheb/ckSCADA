@@ -14,6 +14,7 @@ can then install kafka-python with pip. Then manually install node.js dependanci
 using
 
 .. code-block:: bash
+
   cd ckscada-client
   npm install .
 
