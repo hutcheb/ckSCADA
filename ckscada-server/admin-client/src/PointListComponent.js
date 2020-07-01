@@ -1,13 +1,14 @@
 import React from "react";
 import ObjectListComponent from "./ObjectListComponent.js";
-import Structure from "./structure.js";
 import logProps from "./common.js";
+import pointSchema from './schema/pointSchema.js';
 
 class PointListComponent extends ObjectListComponent {
   constructor(props) {
     super (props);
 
-    this.state.schema = Structure.pointListStructure;
+    this.state.schema = pointSchema.pointSchema;
+    this.state.headers = pointSchema.pointSchema.items.anyOf[0].required;
     this.state.topic = "points";
   }
 

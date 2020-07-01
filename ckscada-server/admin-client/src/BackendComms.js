@@ -1,6 +1,7 @@
 import axios from "axios";
 
 async function postFormData(topic, data, cmd) {
+  console.log('http://localhost:3000/api/' + topic + "/" + cmd)
   axios({
       method: 'post',
       url: 'http://localhost:3000/api/' + topic + "/" + cmd,
@@ -9,8 +10,7 @@ async function postFormData(topic, data, cmd) {
 }
 
 /**
- * Return the ratio of the inline text length of the links in an element to
- * the inline text length of the entire element.
+ * Get list from server using a string filter. It also updates the status bar.
  *
  */
 function getTopicList(topic, filter, callback, setProgress) {
