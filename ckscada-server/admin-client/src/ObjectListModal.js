@@ -70,13 +70,13 @@ class ObjectListModal extends React.Component {
       value.push(
         <InputGroup className="mb-3 modalinputclass">
           <InputGroup.Prepend>
-            <InputGroup.Text id="basic-addon1">{col}</InputGroup.Text>
+            <InputGroup.Text id="basic-addon1">{column[col]}</InputGroup.Text>
           </InputGroup.Prepend>
           <FormControl
             id="value"
-            placeholder={row[col]}
-            aria-label={col}
-            aria-describedby={col}
+            placeholder={row[column[col]]}
+            aria-label={column[col]}
+            aria-describedby={column[col]}
           />
         </InputGroup>
       );

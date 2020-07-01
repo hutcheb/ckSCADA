@@ -11,6 +11,13 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
+import Ajv from 'ajv';
+
+import pointSchema from './schema/pointSchema.js';
+import deviceSchema from './schema/deviceSchema.js';
+import clientSchema from './schema/clientSchema.js';
+import topicSchema from './schema/topicSchema.js';
+import groupSchema from './schema/groupSchema.js';
 
 import "./App.css";
 import PointListComponent from "./PointListComponent.js";
@@ -20,19 +27,25 @@ import TopicListComponent from "./TopicListComponent.js";
 import ClientListComponent from "./ClientListComponent.js";
 import { getTopicList } from "./BackendComms.js";
 
+
 /**
- * Return the ratio of the inline text length of the links in an element to
- * the inline text length of the entire element.
+ * Main React Class
  *
  */
 class App extends React.Component {
   /**
-   * Return the ratio of the inline text length of the links in an element to
-   * the inline text length of the entire element.
+   * Main constructor
    *
    */
   constructor(props) {
     super (props);
+
+    this.ajv = new Ajv();
+    this.compiledPointSchema = this.ajv.compile(pointSchema);
+    this.compiledDeviceSchema = this.ajv.compile(deviceSchema);
+    this.compiledClientSchema = this.ajv.compile(clientSchema);
+    this.compiledTopicSchema = this.ajv.compile(topicSchema);
+    this.compiledGroupSchema = this.ajv.compile(groupSchema);
 
     this.state = {
       addButtonShow: "hidden",
@@ -92,15 +105,15 @@ class App extends React.Component {
     switch(topic) {
       case "points":
         this.state.PointListDisplayRef.current.setShow(true);
-        this.setAddButtonShow("visibe");
+        this.setAddButtonShow("visible");
         break;
       case "groups":
         this.state.GroupListDisplayRef.current.setShow(true);
-        this.setAddButtonShow("visible");
+        this.setAddButtonShow("hidden");
         break;
       case "devices":
         this.state.DeviceListDisplayRef.current.setShow(true);
-        this.setAddButtonShow("hidden");
+        this.setAddButtonShow("visible");
         break;
       case "topics":
         this.state.TopicListDisplayRef.current.setShow(true);
@@ -285,23 +298,38 @@ class App extends React.Component {
   }
 
   setTopicsList(status) {
-    this.setState({ topicsList: status });
+    var valid = this.compiledTopicSchema(status);
+    if (valid) {
+      this.setState({ topicsList: status });
+    }
   }
 
   setPointsList(status) {
-    this.setState({ pointsList: status });
+    var valid = this.compiledPointSchema(status);
+    if (valid) {
+        this.setState({ pointsList: status });
+    }
   }
 
   setGroupsList(status) {
-    this.setState({ groupsList: status });
+    var valid = this.compiledGroupSchema(status);
+    if (valid) {
+      this.setState({ groupsList: status });
+    }
   }
 
   setDevicesList(status) {
-    this.setState({ devicesList: status });
+    var valid = this.compiledDeviceSchema(status);
+    if (valid) {
+      this.setState({ devicesList: status });
+    }
   }
 
   setClientsList(status) {
-    this.setState({ clientsList: status });
+    var valid = this.compiledClientSchema(status);
+    if (valid) {
+      this.setState({ clientsList: status });
+    }
   }
 
   setFilter(status) {

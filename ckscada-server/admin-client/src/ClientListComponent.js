@@ -1,13 +1,15 @@
 import React from "react";
+
 import ObjectListComponent from "./ObjectListComponent.js";
-import Structure from "./structure.js";
 import logProps from "./common.js";
+import clientSchema from './schema/clientSchema.js';
 
 class ClientListComponent extends ObjectListComponent {
   constructor(props) {
     super (props);
 
-    this.state.schema = Structure.clientListStructure;
+    this.state.schema = clientSchema.clientSchema;
+    this.state.headers = clientSchema.clientSchema.items.anyOf[0].required;
     this.state.topic = "clients";
   }
 

@@ -26,8 +26,8 @@ class ObjectListComponent extends React.Component {
     let header;
     let value = [];
 
-    for (header in this.state.schema) {
-      value.push(<th>{header}</th>);
+    for (header in this.state.headers) {
+      value.push(<th>{this.state.headers[header]}</th>);
     }
     return (
       <thead>
@@ -40,8 +40,8 @@ class ObjectListComponent extends React.Component {
     let value = [];
     let col;
 
-    for (col in this.state.schema) {
-      value.push(<td>{row[col]}</td>);
+    for (col in this.state.headers) {
+      value.push(<td>{row[this.state.headers[col]]}</td>);
     }
     return (
       <tr
@@ -88,7 +88,7 @@ class ObjectListComponent extends React.Component {
             show={this.state.modalShow}
             onHide={this.setModalShow}
             row={this.state.row}
-            col={this.state.schema}
+            col={this.state.headers}
           />
         </div>
       );
