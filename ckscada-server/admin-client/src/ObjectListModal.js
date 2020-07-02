@@ -12,7 +12,8 @@ class ObjectListModal extends React.Component {
 
     this.state = {
       topic: props.topic,
-      onHide: props.onHide
+      onHide: props.onHide,
+      schema: props.schema
     };
   }
 
@@ -62,12 +63,24 @@ class ObjectListModal extends React.Component {
     this.state.onHide(false);
   }
 
-  renderModalRow(row, column) {
-    let value = [];
-    let col;
-
-    for (col in column) {
-      value.push(
+  modalFormControl(row, col, column, readonly) {
+    if (readonly) {
+      return (
+        <InputGroup className="mb-3 modalinputclass">
+          <InputGroup.Prepend>
+            <InputGroup.Text id="basic-addon1">{column[col]}</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
+            id="value"
+            readOnly
+            placeholder={row[column[col]]}
+            aria-label={column[col]}
+            aria-describedby={column[col]}
+          />
+        </InputGroup>
+      );
+    } else {
+      return (
         <InputGroup className="mb-3 modalinputclass">
           <InputGroup.Prepend>
             <InputGroup.Text id="basic-addon1">{column[col]}</InputGroup.Text>
@@ -80,6 +93,17 @@ class ObjectListModal extends React.Component {
           />
         </InputGroup>
       );
+    }
+  }
+
+  renderModalRow(row, column) {
+    let value = [];
+    let col;
+    let readOnly = false;
+
+    for (col in column) {
+      readOnly = this.state.schema.items.anyOf[0].properties[column[col]].readOnly;
+      value.push(this.modalFormControl(row, col, column, readOnly));
     }
     return <div>{value}</div>;
   }

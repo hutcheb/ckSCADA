@@ -41,6 +41,7 @@ export default {
                             "title": "Topic's Name",
                             "description": "Name of Kafka topic",
                             "default": "",
+                            "readOnly": true,
                             "examples": [
                                 "client-work-692fe34a-f1dc-4595-b3cb-02310042c212"
                             ]

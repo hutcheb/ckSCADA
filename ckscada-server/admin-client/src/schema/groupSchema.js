@@ -41,6 +41,7 @@ export default {
                             "title": "The name schema",
                             "description": "Name of consumer group",
                             "default": "",
+                            "readOnly": true,
                             "examples": [
                                 "webapi"
                             ]

@@ -77,6 +77,7 @@ export default {
                         "title": "The tagCount schema",
                         "description": "Number of tags attached to the device",
                         "default": 0,
+                        "readOnly": true,
                         "examples": [
                             36
                         ]

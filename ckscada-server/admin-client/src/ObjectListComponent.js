@@ -89,6 +89,7 @@ class ObjectListComponent extends React.Component {
             onHide={this.setModalShow}
             row={this.state.row}
             col={this.state.headers}
+            schema={this.state.schema}
           />
         </div>
       );
