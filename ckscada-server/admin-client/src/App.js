@@ -1,5 +1,5 @@
 import React from "react";
-
+//Specific React Component Imports
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
@@ -11,15 +11,14 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
+//Other import packages
 import Ajv from 'ajv';
-
+//Custom import packages
 import pointSchema from './schema/pointSchema.js';
 import deviceSchema from './schema/deviceSchema.js';
 import clientSchema from './schema/clientSchema.js';
 import topicSchema from './schema/topicSchema.js';
 import groupSchema from './schema/groupSchema.js';
-
-import "./App.css";
 import PointListComponent from "./PointListComponent.js";
 import GroupListComponent from "./GroupListComponent.js";
 import DeviceListComponent from "./DeviceListComponent.js";
@@ -27,6 +26,7 @@ import TopicListComponent from "./TopicListComponent.js";
 import ClientListComponent from "./ClientListComponent.js";
 import { getTopicList } from "./BackendComms.js";
 
+import "./App.css";
 
 /**
  * Main React Class
@@ -76,22 +76,44 @@ class App extends React.Component {
     this.addCopyEventListener();
   }
 
+  convertListtoTabDelimited(list) {
+    let headers = []
+    let l;
+    for (l in list) {
+      headers.push(list[l])
+    }
+    return headers.join('\t')
+  }
+
+  /**
+  * Listens for the broswer copy command triggered by either Ctrl+C or from the
+  * browser menu.
+  *
+  * Copies the current filtered list to the clipboard.
+  */
   addCopyEventListener() {
+    let pointListDisplayRef = this.state.PointListDisplayRef;
+    let deviceListDisplayRef = this.state.DeviceListDisplayRef;
+    let topicListDisplayRef = this.state.TopicListDisplayRef;
+    let groupListDisplayRef = this.state.GroupListDisplayRef;
+    let clientListDisplayRef = this.state.ClientListDisplayRef;
+
+    let convertListtoTabDelimited = this.convertListtoTabDelimited
+
     document.addEventListener('copy', function(e) {
-      if (this.state.PointListDisplayRef.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(this.state.pointsList));
-      } else if (this.state.DeviceListDisplayRef.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(this.state.devicesList));
-      } else if (this.state.TopicListDisplayRef.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(this.state.topicsList));
-      } else if (this.state.GroupListDisplayRef.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(this.state.groupsList));
+      if (pointListDisplayRef.current.state.show) {
+        e.clipboardData.setData('text/plain', JSON.stringify(pointListDisplayRef.current.props.objectlist));
+      } else if (deviceListDisplayRef.current.state.show) {
+        e.clipboardData.setData('text/plain', JSON.stringify(deviceListDisplayRef.current.props.objectlist));
+      } else if (topicListDisplayRef.current.state.show) {
+        e.clipboardData.setData('text/plain', JSON.stringify(topicListDisplayRef.current.props.objectlist));
+      } else if (groupListDisplayRef.current.state.show) {
+        e.clipboardData.setData('text/plain', JSON.stringify(groupListDisplayRef.current.props.objectlist));
       }
-      else if (this.state.ClientListDisplayRef.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(this.state.groupsList));
+      else if (clientListDisplayRef.current.state.show) {
+        e.clipboardData.setData('text/plain', JSON.stringify(clientListDisplayRef.current.props.objectlist));
       }
       console.log("Copied to Clipboard")
-
       e.preventDefault();
     });
   }
