@@ -2,11 +2,12 @@ Introduction
 ===================================
 
 ckSCADA is an open source SCADA system built using Kafka.
+
 https://ckscada.readthedocs.io/
 
 The primary aim is to be an open source alternate to proprietry SCADA systems.
 
-Using Kafka it allows the system to be easily extended using third party
+Using Kafka allows the system to be easily extended using third party
 components. Kafka is a very well supported framework for messaging between
 components. The system is able to be scaled easily with the addition of additional
 Kafka brokers.
@@ -17,7 +18,7 @@ Roadmap
 The system is currently in the very early stage of development and is not suitable
 for production use.
 
-* v0.1 
+* v0.1
 
         *       Basic framework has been setup and proof of concept implemented.
 
@@ -27,13 +28,13 @@ Future Release Milestones
 * v0.2  
 
         *       Add exception handling to server code
-        
+
         *       Document server code
-        
+
         *       Fix issues around server redundancy
-        
+
         *       Add additional devices including server metric tags
-        
+
         *       Discuss Python implementation for server components
 
 * v0.3  
@@ -45,32 +46,47 @@ Server Installation
 
 To install the server components.
 
-Firstly make sure your Kafka broker/clusetr has been setup already. The server
-components should be able to be run on the Kafka broker.
+Firstly make sure your Kafka broker/cluster has been setup already. There are
+plenty of tutorials on how to setup a KAfka cluster such as this one:-
 
-For Windows you will need to install node.js manually as well as python 3. You
-can then install kafka-python with pip and manually install node.js dependancies
-using
+https://kafka.apache.org/quickstart
+
+Windows Installation
+-----------------------------------
+
+Working under the assumption that your machine is connected to the internet.
+
+For Windows you will need to install node.js manually:-
+
+https://nodejs.org/en/download/
+
+Install Python 3
+
+https://www.python.org/downloads/
+
+make sure that python is included in your path.
+
+Following this, download the ckscada package and download the npm/python packages.
 
 ```
 
-  npm install .
+  make.bat
 
 ```
 
-in the ckscada-client and ckscada-server/admin-client folders.
+Linux Installation
+-----------------------------------
 
 For Debian/Ubuntu use apt to install it
 
 ```
 
   sudo apt install npm python3
-  sudo npm install -g npm-cache
   pip3 install kafka-python
 
 ```
 
-Following this, download the ckscada package and build the npm packages.
+Following this, download the ckscada package and download the npm/python packages.
 
 ```
 
@@ -79,10 +95,10 @@ Following this, download the ckscada package and build the npm packages.
 
 ```
 
-Edit the config.json file in the config folder.
+Edit the config.json file in the config folders.
 Include the nodeId, ip address and the port of one of your Kafka brokers.
 
-We will next run the server components.
+We will next run the server components, opening a new terminal between each set:-
 
 ```
 
@@ -90,15 +106,15 @@ We will next run the server components.
   python3 ckagent.py --config ../../config/config.json
 
   cd ckscada-server/admin-server/src
-  python3 points.py --config ../../config/test.json
+  python3 ckadminserver.py --config ../../config/config.json
 
   cd ckscada-server/admin-client
   npm start .
-  
+
 ```
 
-There is a helper script to setup a few tags on simulation device and start
-publishing them the sample page on the client uses these.
+There is a helper script to setup a few tags on a simulation device and start
+publishing them, the sample page on the client uses these.
 
 ```
 
@@ -116,23 +132,33 @@ Viewer Only
 To install the viewer download the Node.js package from nodejs.org for your
 operating system.
 
-For Windows you will need to install node.js manually as well as python 3. You
-can then install kafka-python with pip. Then manually install node.js dependancies
-using
+Windows Installation
+-----------------------------------
+
+Install node.js manually:-
+
+https://nodejs.org/en/download/
+
+Following this, download the ckscada package, npm packages and
+remove the folders that aren't needed.
 
 ```
+
+  del ckscada-server
 
   cd ckscada-client
   npm install .
- 
+
 ```
+
+Linux Installation
+-----------------------------------
 
 For Debian/Ubuntu use apt to install it
 
 ```
 
   sudo apt install npm
-  sudo npm install -g npm-cache
 
 ```
 
@@ -140,8 +166,8 @@ Following this, download the ckscada package and build the npm packages.
 
 ```
 
-  cd ckSCADA
-  make
+  cd ckscada-client
+  npm install .
 
 ```
 
