@@ -76,13 +76,32 @@ class App extends React.Component {
     this.addCopyEventListener();
   }
 
+  /**
+  * Convert a json list to a tab delimited string.
+  *
+  * Converts flat json file to a tab delimited string.
+  *
+  * @param list - json string
+  */
   convertListtoTabDelimited(list) {
-    let headers = []
-    let l;
-    for (l in list) {
-      headers.push(list[l])
+    let headers = [];
+    let rows = [];
+    let name, l, temp, i;
+    let result = "";
+
+    for (name in list[0]) {
+      headers.push(name);
     }
-    return headers.join('\t')
+    result = headers.join('\t') + "\n";
+
+    for (l in list) {
+      temp = [];
+      for (i in list[l]) {
+        temp.push(list[l][i]);
+      }
+      result += temp.join('\t') + "\n";
+    }
+    return result;
   }
 
   /**
@@ -102,16 +121,16 @@ class App extends React.Component {
 
     document.addEventListener('copy', function(e) {
       if (pointListDisplayRef.current.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(pointListDisplayRef.current.props.objectlist));
+        e.clipboardData.setData('text/plain', convertListtoTabDelimited(pointListDisplayRef.current.props.objectlist));
       } else if (deviceListDisplayRef.current.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(deviceListDisplayRef.current.props.objectlist));
+        e.clipboardData.setData('text/plain', convertListtoTabDelimited(deviceListDisplayRef.current.props.objectlist));
       } else if (topicListDisplayRef.current.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(topicListDisplayRef.current.props.objectlist));
+        e.clipboardData.setData('text/plain', convertListtoTabDelimited(topicListDisplayRef.current.props.objectlist));
       } else if (groupListDisplayRef.current.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(groupListDisplayRef.current.props.objectlist));
+        e.clipboardData.setData('text/plain', convertListtoTabDelimited(groupListDisplayRef.current.props.objectlist));
       }
       else if (clientListDisplayRef.current.state.show) {
-        e.clipboardData.setData('text/plain', JSON.stringify(clientListDisplayRef.current.props.objectlist));
+        e.clipboardData.setData('text/plain', convertListtoTabDelimited(clientListDisplayRef.current.props.objectlist));
       }
       console.log("Copied to Clipboard")
       e.preventDefault();
