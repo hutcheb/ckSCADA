@@ -47,14 +47,14 @@ Server Installation
 To install the server components.
 
 Firstly make sure your Kafka broker/cluster has been setup already. There are
-plenty of tutorials on how to setup a KAfka cluster such as this one:-
+plenty of tutorials on how to setup a Kafka cluster such as this one:-
 
 https://kafka.apache.org/quickstart
 
+Working under the assumption that your machine is connected to the internet.
+
 Windows Installation
 -----------------------------------
-
-Working under the assumption that your machine is connected to the internet.
 
 For Windows you will need to install node.js manually:-
 
@@ -77,12 +77,11 @@ Following this, download the ckscada package and download the npm/python package
 Linux Installation
 -----------------------------------
 
-For Debian/Ubuntu use apt to install it
+For Debian/Ubuntu use apt to install dependancies
 
 ```
 
   sudo apt install npm python3
-  pip3 install kafka-python
 
 ```
 
@@ -98,7 +97,7 @@ Following this, download the ckscada package and download the npm/python package
 Edit the config.json file in the config folders.
 Include the nodeId, ip address and the port of one of your Kafka brokers.
 
-We will next run the server components, opening a new terminal between each set:-
+We will next run the server components, opening a new terminal between each set of commands:-
 
 ```
 
@@ -165,7 +164,7 @@ For Debian/Ubuntu use apt to install it
 Following this, download the ckscada package and build the npm packages.
 
 ```
-
+  rm -r cksacda-server
   cd ckscada-client
   npm install .
 
