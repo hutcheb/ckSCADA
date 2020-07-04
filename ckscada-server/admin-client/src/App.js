@@ -137,12 +137,17 @@ class App extends React.Component {
     });
   }
 
+  /**
+  * Shows a specific page within the main area
+  *
+  * This sets the show state within the List React Component. This then doesn't
+  * render the page.
+  *
+  * @param {string} topic - name of the page to display e.g. topics, points, devices.
+  *
+  */
   displayPage(topic) {
-    this.state.PointListDisplayRef.current.setShow(false);
-    this.state.GroupListDisplayRef.current.setShow(false);
-    this.state.DeviceListDisplayRef.current.setShow(false);
-    this.state.TopicListDisplayRef.current.setShow(false);
-    this.state.ClientListDisplayRef.current.setShow(false);
+    this.getCurrentPage().setShow(false);    
     switch(topic) {
       case "points":
         this.state.PointListDisplayRef.current.setShow(true);
@@ -164,6 +169,30 @@ class App extends React.Component {
         this.state.ClientListDisplayRef.current.setShow(true);
         this.setAddButtonShow("hidden");
         break;
+    }
+  }
+
+  /**
+  * Gets the reference to the currently shown page.
+  *
+  * Checks the show state of each page and returns the reference to the List Component.
+  *
+  * @returns {ObjectListComponent}
+  */
+  getCurrentPage() {
+    if (this.state.PointListDisplayRef.current.state.show) {
+      return this.state.PointListDisplayRef.current;
+    } else if (this.state.GroupListDisplayRef.current.state.show) {
+      return this.state.GroupListDisplayRef.current;
+    } else if (this.state.DeviceListDisplayRef.current.state.show) {
+      return this.state.DeviceListDisplayRef.current;
+    } else if (this.state.TopicListDisplayRef.current.state.show) {
+      return this.state.TopicListDisplayRef.current;
+    } else if (this.state.ClientListDisplayRef.current.state.show) {
+      return this.state.ClientListDisplayRef.current;
+    }
+    else {
+      return this.state.PointListDisplayRef.current;
     }
   }
 
@@ -189,7 +218,7 @@ class App extends React.Component {
                   </Nav>
                 </Navbar.Collapse>
                 <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                  <Button onClick={(ref) => {}}
+                  <Button onClick={(ref) => {this.getCurrentPage().setModalShow(true)}}
                    style={{visibility: this.state.addButtonShow}}>
                    Add+
                   </Button>
@@ -305,6 +334,16 @@ class App extends React.Component {
     );
   }
 
+  /**
+  * Requests an update of the currently displayed list from the servers.
+  *
+  * A request is sent to the web server which then broadcasts a request to update
+  * the list. This is then passed back and stored within an object list.
+  *
+  * @param {event} ref -  reference to the event that triggered the update.
+  *                       Expecting an on key press event.
+  *
+  */
   queryFilteredList(ref) {
     if (ref.key === 'Enter') {
       if (this.state.TopicListDisplayRef.current.state.show === true) {
