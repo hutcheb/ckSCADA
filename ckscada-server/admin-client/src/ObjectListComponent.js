@@ -66,6 +66,16 @@ class ObjectListComponent extends React.Component {
     return <tbody>{value}</tbody>;
   }
 
+  getAllFields(parameters) {
+    let headers = [];
+    let name;
+
+    for (name in parameters) {
+      headers.push(name);
+    }
+    return headers;
+  }
+
   render() {
     if (this.state.show) {
       return (
@@ -88,7 +98,7 @@ class ObjectListComponent extends React.Component {
             show={this.state.modalShow}
             onHide={this.setModalShow}
             row={this.state.row}
-            col={this.state.headers}
+            col={this.state.modalFields}
             schema={this.state.schema}
           />
         </div>

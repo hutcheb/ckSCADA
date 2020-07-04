@@ -59,13 +59,7 @@ export default {
                     ],
                     "required": [
                         "name",
-                        "value",
-                        "description",
-                        "enghigh",
-                        "englow",
-                        "rawhigh",
-                        "rawlow",
-                        "eu",
+                        "description",                        
                         "type",
                         "device"
                     ],

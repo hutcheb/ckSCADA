@@ -10,6 +10,7 @@ class ClientListComponent extends ObjectListComponent {
 
     this.state.schema = clientSchema.clientSchema;
     this.state.headers = clientSchema.clientSchema.items.anyOf[0].required;
+    this.state.modalFields = this.getAllFields(clientSchema.clientSchema.items.anyOf[0].properties);
     this.state.topic = "clients";
   }
 

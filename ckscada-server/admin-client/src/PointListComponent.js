@@ -9,6 +9,7 @@ class PointListComponent extends ObjectListComponent {
 
     this.state.schema = pointSchema.pointSchema;
     this.state.headers = pointSchema.pointSchema.items.anyOf[0].required;
+    this.state.modalFields = this.getAllFields(pointSchema.pointSchema.items.anyOf[0].properties);
     this.state.topic = "points";
   }
 
