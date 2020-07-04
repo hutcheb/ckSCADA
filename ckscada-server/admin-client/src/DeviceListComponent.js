@@ -10,6 +10,7 @@ class DeviceListComponent extends ObjectListComponent {
 
     this.state.schema = deviceSchema.deviceSchema;
     this.state.headers = deviceSchema.deviceSchema.items.anyOf[0].required;
+    this.state.modalFields = this.getAllFields(deviceSchema.deviceSchema.items.anyOf[0].properties);
     this.state.topic = "devices";
   }
 

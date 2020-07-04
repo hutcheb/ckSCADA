@@ -9,6 +9,7 @@ class TopicListComponent extends ObjectListComponent {
 
     this.state.schema = topicSchema.topicSchema;
     this.state.headers = topicSchema.topicSchema.items.anyOf[0].required;
+    this.state.modalFields = this.getAllFields(topicSchema.topicSchema.items.anyOf[0].properties);
     this.state.topic = "topics";
   }
 

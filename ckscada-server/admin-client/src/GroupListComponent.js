@@ -10,6 +10,7 @@ class GroupListComponent extends ObjectListComponent {
 
     this.state.schema = groupSchema.groupSchema;
     this.state.headers = groupSchema.groupSchema.items.anyOf[0].required;
+    this.state.modalFields = this.getAllFields(groupSchema.groupSchema.items.anyOf[0].properties);
     this.state.topic = "groups";
   }
 
