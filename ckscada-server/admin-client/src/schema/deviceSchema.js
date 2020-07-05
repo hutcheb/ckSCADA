@@ -54,6 +54,7 @@ export default {
                     "name": {
                         "$id": "#/items/anyOf/0/properties/name",
                         "type": "string",
+                        "tab": "General",
                         "title": "The name schema",
                         "description": "Name of the device",
                         "default": "",
@@ -64,6 +65,7 @@ export default {
                     "type": {
                         "$id": "#/items/anyOf/0/properties/type",
                         "type": "string",
+                        "tab": "General",
                         "title": "The type schema",
                         "description": "Device type such as simulation",
                         "default": "",
@@ -74,6 +76,7 @@ export default {
                     "tagCount": {
                         "$id": "#/items/anyOf/0/properties/tagCount",
                         "type": "integer",
+                        "tab": "General",
                         "title": "The tagCount schema",
                         "description": "Number of tags attached to the device",
                         "default": 0,
@@ -85,6 +88,7 @@ export default {
                     "replication": {
                         "$id": "#/items/anyOf/0/properties/replication",
                         "type": "integer",
+                        "tab": "General",
                         "title": "The replication schema",
                         "description": "Number of active instances of this device",
                         "default": 0,
@@ -95,6 +99,7 @@ export default {
                     "scantime": {
                         "$id": "#/items/anyOf/0/properties/scantime",
                         "type": "integer",
+                        "tab": "General",
                         "title": "The scantime schema",
                         "description": "Scan time, for periodic devices it updates tags every scan time. For report by exception it responds to messages every scan time",
                         "default": 0,

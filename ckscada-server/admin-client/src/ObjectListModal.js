@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
 import Modal from "react-bootstrap/Modal";
 import InputGroup from "react-bootstrap/InputGroup";
+import Tabs from "react-bootstrap/Tabs";
+import Tab from "react-bootstrap/Tab";
 
 import { postFormData } from "./BackendComms.js"
 
@@ -19,6 +21,8 @@ class ObjectListModal extends React.Component {
 
   render() {
     if (this.props.show) {
+      this.tabs = this.getListofTabs(this.props.col);
+      let t;
       return (
         <Modal
           {...this.props}
@@ -31,7 +35,9 @@ class ObjectListModal extends React.Component {
               {this.props.row.name}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>{this.renderModalRow(this.props.row, this.props.col)}</Modal.Body>
+          <Modal.Body>
+            {this.renderTabs(this.props.row, this.props.col)}
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={(ref) => {this.buttonOnClick(ref, 'del')}}>Delete</Button>
             <Button variant="primary" onClick={(ref) => {this.props.onHide(false)}}>Discard Changes</Button>
@@ -42,6 +48,39 @@ class ObjectListModal extends React.Component {
     } else {
       return null;
     }
+  }
+
+  renderTabs(row, column) {
+    let value = [];
+    let t;
+
+    for (t in this.tabs) {
+      value.push(this.renderTab(this.tabs[t], row, column));
+    }
+    return <Tabs defaultActiveKey="General" id="uncontrolled-tab-example">{value}</Tabs>;
+  }
+
+  renderTab(tab, row, column) {
+    return (
+      <Tab eventKey={tab} title={tab}>
+        {this.renderModalRow(tab, row, column)}
+      </Tab>
+    );
+  }
+
+  getListofTabs(column) {
+    let properties = this.state.schema;
+    let tabs = [];
+    let col;
+
+    for (col in column) {
+      let t = this.state.schema.items.anyOf[0].properties[column[col]].tab;
+      if (tabs.includes(t) === false) {
+        console.log(t)
+        tabs.push(t);
+      }
+    }
+    return tabs
   }
 
   buttonOnClick(ref, cmd) {
@@ -96,14 +135,16 @@ class ObjectListModal extends React.Component {
     }
   }
 
-  renderModalRow(row, column) {
+  renderModalRow(tab, row, column) {
     let value = [];
     let col;
     let readOnly = false;
 
     for (col in column) {
-      readOnly = this.state.schema.items.anyOf[0].properties[column[col]].readOnly;
-      value.push(this.modalFormControl(row, col, column, readOnly));
+      if (tab == this.state.schema.items.anyOf[0].properties[column[col]].tab) {
+        readOnly = this.state.schema.items.anyOf[0].properties[column[col]].readOnly;
+        value.push(this.modalFormControl(row, col, column, readOnly));
+      }
     }
     return <div>{value}</div>;
   }

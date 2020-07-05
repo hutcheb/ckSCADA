@@ -38,6 +38,7 @@ export default {
                         "name": {
                             "$id": "#/items/anyOf/0/properties/name",
                             "type": "string",
+                            "tab": "General",
                             "title": "The name schema",
                             "description": "Name of consumer group",
                             "default": "",

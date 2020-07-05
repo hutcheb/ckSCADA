@@ -59,7 +59,7 @@ export default {
                     ],
                     "required": [
                         "name",
-                        "description",                        
+                        "description",
                         "type",
                         "device"
                     ],
@@ -68,6 +68,7 @@ export default {
                         "name": {
                             "$id": "#/items/anyOf/0/properties/name",
                             "type": "string",
+                            "tab": "General",
                             "title": "Point Name",
                             "description": "Name of point",
                             "default": "",
@@ -78,6 +79,7 @@ export default {
                         "value": {
                             "$id": "#/items/anyOf/0/properties/value",
                             "type": "number",
+                            "tab": "General",
                             "title": "Initial Value",
                             "description": "Initial value of point",
                             "default": 0.0,
@@ -88,6 +90,7 @@ export default {
                         "description": {
                             "$id": "#/items/anyOf/0/properties/description",
                             "type": "string",
+                            "tab": "General",
                             "title": "Description",
                             "description": "Description of point",
                             "default": "",
@@ -98,6 +101,7 @@ export default {
                         "enghigh": {
                             "$id": "#/items/anyOf/0/properties/enghigh",
                             "type": "string",
+                            "tab": "General",
                             "title": "High Engineering Limit",
                             "description": "High engineering limit",
                             "default": "",
@@ -108,6 +112,7 @@ export default {
                         "englow": {
                             "$id": "#/items/anyOf/0/properties/englow",
                             "type": "string",
+                            "tab": "General",
                             "title": "Low Engineering Limit",
                             "description": "Low Engineering Limit",
                             "default": "",
@@ -118,6 +123,7 @@ export default {
                         "rawhigh": {
                             "$id": "#/items/anyOf/0/properties/rawhigh",
                             "type": "string",
+                            "tab": "General",
                             "title": "High Raw Limit",
                             "description": "High Raw Limit",
                             "default": "",
@@ -128,6 +134,7 @@ export default {
                         "rawlow": {
                             "$id": "#/items/anyOf/0/properties/rawlow",
                             "type": "string",
+                            "tab": "General",
                             "title": "Low Raw Limit",
                             "description": "Low Raw Limit",
                             "default": "",
@@ -138,6 +145,7 @@ export default {
                         "eu": {
                             "$id": "#/items/anyOf/0/properties/eu",
                             "type": "string",
+                            "tab": "General",
                             "title": "Engineering Unit",
                             "description": "Engineering Unit",
                             "default": "",
@@ -148,6 +156,7 @@ export default {
                         "type": {
                             "$id": "#/items/anyOf/0/properties/type",
                             "type": "string",
+                            "tab": "General",
                             "title": "Point Type",
                             "description": "Point Type",
                             "default": "",
@@ -158,6 +167,7 @@ export default {
                         "device": {
                             "$id": "#/items/anyOf/0/properties/device",
                             "type": "string",
+                            "tab": "General",
                             "title": "Point's Device",
                             "description": "Device point is attached to.",
                             "default": "",
