@@ -38,6 +38,7 @@ export default {
                     "name": {
                         "$id": "#/items/anyOf/0/properties/name",
                         "type": "string",
+                        "tab": "General",
                         "title": "Name of the client",
                         "description": "<client identifier>-<hostname>-<guid>",
                         "default": "",
