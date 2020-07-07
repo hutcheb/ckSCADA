@@ -52,7 +52,7 @@ extensions = [
 ]
 
 root_for_relative_js_paths = '../../'
-js_source_path = '../ckscada-server/admin-client/src'
+js_source_path = '../../ckscada-server/admin-client/src'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
