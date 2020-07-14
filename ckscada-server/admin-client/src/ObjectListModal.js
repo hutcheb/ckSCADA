@@ -22,7 +22,6 @@ class ObjectListModal extends React.Component {
   render() {
     if (this.props.show) {
       this.tabs = this.getListofTabs(this.props.col);
-      let t;
       return (
         <Modal
           {...this.props}
@@ -69,14 +68,12 @@ class ObjectListModal extends React.Component {
   }
 
   getListofTabs(column) {
-    let properties = this.state.schema;
     let tabs = [];
     let col;
 
     for (col in column) {
       let t = this.state.schema.items.anyOf[0].properties[column[col]].tab;
       if (tabs.includes(t) === false) {
-        console.log(t)
         tabs.push(t);
       }
     }
@@ -141,7 +138,7 @@ class ObjectListModal extends React.Component {
     let readOnly = false;
 
     for (col in column) {
-      if (tab == this.state.schema.items.anyOf[0].properties[column[col]].tab) {
+      if (tab === this.state.schema.items.anyOf[0].properties[column[col]].tab) {
         readOnly = this.state.schema.items.anyOf[0].properties[column[col]].readOnly;
         value.push(this.modalFormControl(row, col, column, readOnly));
       }

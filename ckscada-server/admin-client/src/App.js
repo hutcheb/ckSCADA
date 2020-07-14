@@ -85,7 +85,6 @@ class App extends React.Component {
   */
   convertListtoTabDelimited(list) {
     let headers = [];
-    let rows = [];
     let name, l, temp, i;
     let result = "";
 
@@ -147,7 +146,7 @@ class App extends React.Component {
   *
   */
   displayPage(topic) {
-    this.getCurrentPage().setShow(false);    
+    this.getCurrentPage().setShow(false);
     switch(topic) {
       case "points":
         this.state.PointListDisplayRef.current.setShow(true);
@@ -168,6 +167,8 @@ class App extends React.Component {
       case "clients":
         this.state.ClientListDisplayRef.current.setShow(true);
         this.setAddButtonShow("hidden");
+        break;
+      default:
         break;
     }
   }
