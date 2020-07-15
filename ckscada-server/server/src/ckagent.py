@@ -9,6 +9,7 @@ import uuid
 import argparse
 import sys
 import traceback
+import psutil
 from multiprocessing import Process
 from ckagentsimulation import Simulation
 from ckagentclient import Client
@@ -33,9 +34,10 @@ class Agent():
         #Dictionary to hold ckSCADA component processes for this server.
         #The name of the process being the key and the value is the Process handler.
         #Except for the Agent consumer process 'waitForMessages', all components
-        #should hanlde thier own redundancy
+        #should handle thier own redundancy
         self.processes = {}
         self.brokerArray = []
+        self.producer = None
         self.logger = None
         self.admin_topic = '_admin'
         self.hostname = socket.gethostname()
@@ -53,6 +55,7 @@ class Agent():
                     self.processes.pop(AGENT_CONSUMER_PROCESS)
                     self.startAgentConsumer()
                     self.logger.log("Main agent process has restarted on " + self.hostname)
+                self.monitor()
             else:
                 self.config = self.readConfigFile(self.cmdLineArguments)
                 self.brokerArray = self.convertBrokerArrayToList(self.config)
@@ -60,7 +63,64 @@ class Agent():
                 self.logger.log("Starting ckSCADA Agent on  " + self.hostname + " Using group id:- " + self.group_id)
                 self.startAgentConsumer()
                 self.logger.log("Main agent process started on  " + self.hostname)
+                self.producer = KafkaProducer(bootstrap_servers=self.brokerArray,
+                                              compression_type="gzip",
+                                              buffer_memory=100000000,
+                                              acks=0,
+                                              linger_ms=WATCHDOG_TIMEOUT,
+                                              batch_size=1000000)
             time.sleep(WATCHDOG_TIMEOUT)
+
+
+    def monitor(self):
+        """
+        Monitors the localhost's cpu/ram/io usage and sends it out on the Kafka topic
+        _monitor.<hostname>
+
+        """
+        tags = {}
+        tags["cpu"] = psutil.cpu_percent()
+        mem = psutil.virtual_memory()
+        tags["mem_total"] = mem[0]
+        tags["mem_available"] = mem[1]
+        tags["mem_percent"] = mem[2]
+        tags["mem_used"] = mem[3]
+        tags["mem_free"] = mem[4]
+        tags["mem_active"] = mem[5]
+        tags["mem_inactive"] = mem[6]
+        tags["mem_buffers"] = mem[7]
+        tags["mem_cached"] = mem[8]
+        tags["mem_shared"] = mem[9]
+        tags["mem_slab"] = mem[10]
+        cputimes = psutil.cpu_times()
+        tags["cpu_user"] = cputimes[0]
+        tags["cpu_nice"] = cputimes[1]
+        tags["cpu_system"] = cputimes[2]
+        tags["cpu_idle"] = cputimes[3]
+        tags["cpu_iowait"] = cputimes[4]
+        tags["cpu_irq"] = cputimes[5]
+        tags["cpu_softirq"] = cputimes[6]
+        tags["cpu_steal"] = cputimes[7]
+        tags["cpu_guest"] = cputimes[8]
+        tags["cpu_guest_nice"] = cputimes[9]
+        loadavg = psutil.getloadavg()
+        tags["load_avg_1min"] = loadavg[0]
+        tags["load_avg_5min"] = loadavg[1]
+        tags["load_avg_15min"] = loadavg[2]
+        diskusage = psutil.disk_usage('/')
+        tags["diskusage_total"] = diskusage[0]
+        tags["diskusage_used"] = diskusage[1]
+        tags["diskusage_free"] = diskusage[2]
+        tags["diskusage_percent"] = diskusage[3]
+
+        message = { 'name': self.hostname,
+                    'type': "agent",
+                    'tags': tags,
+                    'replication': 2,
+                    'scantime': WATCHDOG_TIMEOUT
+                    }
+        self.producer.send("_monitor." + self.hostname , genericMessage("update", self.hostname, message, self.hostname, 2))
+
 
     def readConfigFile(self, args):
         """
@@ -111,7 +171,7 @@ class AgentConsumer(Process):
     """
 
     def __init__(self, brokerArray, group_id):
-        self.devices = { "simulation": Simulation, "client": Client }
+        self.devices = { "simulation": Simulation, "client": Client}
         self.brokerArray = brokerArray
         self.processes = {}
         self.hostname = socket.gethostname()
