@@ -13,7 +13,7 @@
   "author": "Ben Hutcheson",
   "license": "ISC",
   "dependencies": {
-    "kafkajs": "^1.13.0-beta.19",
-    "yargs": "^15.3.1"
+    "kafkajs": ">=1.13.0-beta.19",
+    "yargs": ">=15.3.1"
   }
 }

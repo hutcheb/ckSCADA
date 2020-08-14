@@ -10,9 +10,9 @@
   "author": "Ben Hutcheson",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^8.2.5",
-    "kafkajs": "^1.12.0",
-    "uuid": "^8.0.0"
+    "electron": ">=8.2.5",
+    "kafkajs": ">=1.12.0",
+    "uuid": ">=8.0.0"
   },
   "dependencies": {
     "animejs": "^3.2.0"
