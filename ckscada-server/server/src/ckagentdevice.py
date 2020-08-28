@@ -173,10 +173,17 @@ class PeriodicDevice(Device):
 
 
     def cleanup(self):
+        """
+        Perform communication functions
+
+        Sets aside at least 10% of the scan time to perform communication functions
+        """
         waitTime = (self.scantime - self.lastTime)
         startTime = time.time()
         if waitTime <= self.scantime * 0.1:
             waitTime = self.scantime * 0.1
         self.waitForMessages(self.brokerArray, self.name, waitTime)
         sleepTime = waitTime - (time.time() - startTime)
+        if sleepTime < 0.0:
+            sleepTime = 0.0
         time.sleep(sleepTime/1000)

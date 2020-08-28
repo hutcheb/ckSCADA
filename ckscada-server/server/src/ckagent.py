@@ -157,7 +157,7 @@ class Agent():
 
 class AgentConsumer(Process):
     """
-    This is responsible fpr creating and deleting individual ckSCADA components.
+    This is responsible for creating and deleting individual ckSCADA components.
     It responds to requests on the '_admin' Kafka topic such as 'config', 'add'
     and 'del'
 
