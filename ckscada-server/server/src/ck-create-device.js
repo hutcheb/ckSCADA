@@ -28,7 +28,6 @@ function readConfigFile(devicename, devicetype, scantime, configfile, force=fals
                     })
 
                     k = createDevice(devicename, devicetype, scantime, kafka, force, true)
-                    common.logf(k, true)
                 }
             })
         } else {
