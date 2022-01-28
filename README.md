@@ -39,7 +39,7 @@ Future Release Milestones
 
 * v0.3  
 
-        *       Investigate PLC4X project to use for PLC communication.
+        *       Investigate PLC4X project to use for PLC communication
 
 Server Installation
 ===================================
