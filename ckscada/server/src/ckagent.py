@@ -1,3 +1,5 @@
+from enum import Enum
+
 from kafka import KafkaConsumer
 from kafka import KafkaProducer
 from kafka import KafkaAdminClient
@@ -11,13 +13,17 @@ import sys
 import traceback
 import psutil
 from multiprocessing import Process
-from ckagentsimulation import Simulation
-from ckagentclient import Client
 
-from ckcommon import log, serializer, genericMessage, Logger, COMPRESSION_TYPE
+from ckscada.server.src.ckagentclient import Client
+from ckscada.server.src.ckcommon import log, serializer, genericMessage, Logger, COMPRESSION_TYPE
+from ckscada.server.src.ckagentsimulation import Simulation
 
 WATCHDOG_TIMEOUT = 10
 AGENT_CONSUMER_PROCESS = 'waitForMessages'
+
+class ErrorCodes(Enum):
+    SUCCESS: int = 0
+    FAIL: int = 1
 
 class Agent():
     """
@@ -131,8 +137,12 @@ class Agent():
             project.
 
         """
-        configFile = open(args.configfile)
-        return json.load(configFile)
+        try:
+            configFile = open(args.configfile)
+            return json.load(configFile)
+        except FileNotFoundError:
+            log(f"Unable to load config file {args.configfile}")
+            exit(ErrorCodes.FAIL)
 
 
     def startAgentConsumer(self):

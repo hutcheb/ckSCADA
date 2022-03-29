@@ -8,9 +8,9 @@ import json
 import socket
 import random
 
-from ckagentdevice import Device, PeriodicDevice
-from ckcommon import log, genericMessage
-from multiprocessing import Process
+from ckscada.server.src.ckagentdevice import Device, PeriodicDevice
+from ckscada.server.src.ckcommon import log, genericMessage
+
 
 class Client(PeriodicDevice):
 

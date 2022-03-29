@@ -9,8 +9,7 @@ import socket
 import random
 import uuid
 
-from ckcommon import log, genericMessage
-from multiprocessing import Process
+from ckscada.server.src.ckcommon import log, genericMessage
 
 class Device():
 
