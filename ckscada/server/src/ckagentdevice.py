@@ -11,6 +11,11 @@ import uuid
 
 from ckscada.server.src.ckcommon import log, genericMessage
 
+
+class NotImplmentedError:
+    pass
+
+
 class Device():
 
     admin_topic = '_admin.devices'
