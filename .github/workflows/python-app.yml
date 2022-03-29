@@ -5,9 +5,13 @@ name: ckSCADA server
 
 on:
   push:
-    branches: [ release develop ]
+    branches: 
+      - develop
+      - release
   pull_request:
-    branches: [ release develop ]
+    branches:
+      - develop
+      - release
 
 jobs:
   build:
