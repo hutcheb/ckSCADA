@@ -303,9 +303,11 @@ def parseCommandLineArguments():
                         help='config file to use (default: config.json)')
     return parser.parse_args()
 
-if __name__ == '__main__':
+def main():
     log("Starting te ckSCADA server")
     log("All messages will be logged to the Kafka topic '_logging'")
+    args = parseCommandLineArguments()
+    agent = Agent(args)
 
-    cmdLineArguments = parseCommandLineArguments()
-    agent = Agent(cmdLineArguments)
+if __name__ == '__main__':
+    main()

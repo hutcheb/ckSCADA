@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="02ab8b75-c216-445d-94be-e49e496d5f0a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/ckscada-client/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/config/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/src/ckviewer.js" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/src/ckviewer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/src/common.js" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/src/common.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/svg/Analog Input.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/svg/Analog Input.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/svg/Motor.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/svg/Motor.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/svg/Sample-Screen.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/svg/Sample-Screen.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/svg/Scratch.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/svg/Scratch.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/svg/example.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/svg/example.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/svg/testing.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/svg/testing.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-client/svg/welcome.svg" beforeDir="false" afterPath="$PROJECT_DIR$/ckscada/client/svg/welcome.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/BackendComms.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/ClientListComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/DeviceListComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/GroupListComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/ObjectListComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/ObjectListModal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/PointListComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/TopicListComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/schema/clientSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/schema/deviceSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/schema/groupSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/schema/pointSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/src/schema/topicSchema.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-client/webpack.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-server/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-server/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-server/src/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-server/src/ckadmincommon.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/admin-server/src/ckadminserver.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/config/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/requirements.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/change.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ck-create-config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ck-create-device.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ck-create-tag.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ck-delete-tag.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ck-get-config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ckagent.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ckagentclient.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ckagentdevice.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ckagentsimulation.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/ckcommon.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/common.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/load_test.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/project.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/simulate_load_test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/simulate_plant.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/src/test.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ckscada-server/server/test/test-init.sh" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="24NvCjvK93rr62HSIdWWGGYDhXq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ben.hutcheson\development\ckSCADA\ckscada\client" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="02ab8b75-c216-445d-94be-e49e496d5f0a" name="Changes" comment="" />
+      <created>1643483732601</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1643483732601</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>

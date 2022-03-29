@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "ckscada"
+version = "0.1.0"
+description = ""
+authors = ["hutcheb <ben.hutche@gmail.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+kafka-python = "^2.0.2"
+psutil = "^5.9.0"
+Flask = "^2.1.0"
+pytest = "^7.1.1"
+mypy = "^0.942"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+server = 'ckscada.server.src.ckagent:main'
