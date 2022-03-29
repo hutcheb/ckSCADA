@@ -2,8 +2,6 @@ from enum import Enum
 
 from kafka import KafkaConsumer
 from kafka import KafkaProducer
-from kafka import KafkaAdminClient
-from kafka import TopicPartition
 import time
 import json
 import socket
@@ -15,7 +13,7 @@ import psutil
 from multiprocessing import Process
 
 from ckscada.server.src.ckagentclient import Client
-from ckscada.server.src.ckcommon import log, serializer, genericMessage, Logger, COMPRESSION_TYPE
+from ckscada.server.src.ckcommon import log, genericMessage, Logger, COMPRESSION_TYPE
 from ckscada.server.src.ckagentsimulation import Simulation
 
 WATCHDOG_TIMEOUT = 10
