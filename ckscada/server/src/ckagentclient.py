@@ -1,14 +1,8 @@
 from kafka import KafkaConsumer
-from kafka import KafkaProducer
-from kafka import KafkaAdminClient
 from kafka import TopicPartition
-import time
-import datetime
-import json
-import socket
-import random
 
-from ckscada.server.src.ckagentdevice import Device, PeriodicDevice
+
+from ckscada.server.src.ckagentdevice import PeriodicDevice
 from ckscada.server.src.ckcommon import log, genericMessage
 
 
