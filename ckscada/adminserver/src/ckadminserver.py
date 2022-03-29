@@ -1,3 +1,5 @@
+from typing import TypedDict
+
 import flask
 from kafka import KafkaConsumer
 from kafka import KafkaProducer
@@ -12,13 +14,26 @@ import socket
 import uuid
 from ckadmincommon import log
 
+
+class Tag(TypedDict):
+    name: str
+    value: str
+    description: str
+    enghigh: str
+    englow: str
+    rawhigh: str
+    rawlow: str
+    eu: str
+    type: str
+    device: str
+
 DEFAULT_TIMEOUT_S = 15
 DEFAULT_CLEANUP_TIME = 3
 admin_devices_topic = '_admin.devices'
 admin_topic = '_admin'
 group_id_suffix = socket.gethostname()
 name = "webapi"
-tagDatabase = []
+tagDatabase: list[Tag] = []
 lastUpdate = 1
 FLASK_DEBUG = True
 FLASK_PORT = 4954
@@ -96,6 +111,7 @@ def getClientConfig(brokerArray, producer, consumer):
         log("Timed out on config request")
 
     return(deviceList)
+
 
 
 def updateConfig(brokerArray, producer, consumer):
@@ -265,8 +281,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='ckSCADA Agent.')
     parser.add_argument('--configfile', default='config.json',
                        help='config file to use (default: config.json)')
-
-    processes = {}
 
     log("Starting ckSCADA Web Agent on " + name)
     args = parser.parse_args()
